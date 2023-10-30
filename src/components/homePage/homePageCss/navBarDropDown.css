@@ -1,0 +1,10 @@
+.navBarDropDown{
+    position: absolute;
+    top: 5.4rem;
+    width: 130px;
+    padding: 15px;
+    border-radius: 13px;
+    background-color: #621a40;
+    border: #ffffff;
+    box-shadow: #000000;
+}

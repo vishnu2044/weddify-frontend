@@ -1,0 +1,29 @@
+.homeMenuCard {
+    width: 20%;
+    height: 580px;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    border-radius: 0 1rem 1rem 0;
+    right: 60%;
+    left: 0;
+  }
+
+
+.profile_menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .profile_img_circle {
+    width: 70px;
+    height: 70px;
+    background-color: black;
+    border-radius: 1.1rem;
+  }
+  
+

@@ -1,0 +1,34 @@
+.backgroundDiv{
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+    justify-content: center;
+    background-color: #621a40;
+}
+
+.button-div{
+    text-align: center;
+}
+
+.text-div{
+    padding: 18px;
+    color: white;
+}
+
+.regButton{
+    background-color: #360820; 
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    padding: 18px;
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: #ffffff;
+}
+
+/* .regText{
+
+} */
