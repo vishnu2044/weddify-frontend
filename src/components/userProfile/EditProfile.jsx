@@ -189,7 +189,7 @@ const EditProfile = ({ userProfile, user, setCurrentComponent }) => {
                         Gender
                     </label>
                     <select  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='gender' >
-                        <option value={userProfile? userProfile.gender: ''} >{userProfile? userProfile.gender: 'select your gender'}</option>
+                        <option value={userProfile? userProfile?.gender: ''} >{userProfile? userProfile.gender: 'select your gender'}</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
