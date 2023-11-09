@@ -1,16 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
-import obj from '../../jsonData/degrees.json';
-import { ErrorMessge } from '../../alerts/UserAuthentication';
-import AuthContext from '../../context/AuthContext';
+import React, { useState, useEffect, useContext } from 'react'
+import obj from '../../../jsonData/degrees.json';
+import AuthContext from '../../../context/AuthContext';
 import Swal from 'sweetalert2';
+import { ErrorMessge } from '../../../alerts/UserAuthentication';
 
-const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => {
 
+const EditProfessionalPreference = ({
+    setComponent, 
+    professionalPreference
+}) => {
 
     const [degreesList, setDegreesList] = useState([])
-    let { authTokens, logoutUser } = useContext(AuthContext)
-
-    let updateProfessionalDetails = async (e) =>{
+    let {authTokens, logoutUser} = useContext(AuthContext)
+    
+    let updateProfessionalPreferences = async (e) =>{
         e.preventDefault()
         if (e.target.occupation.value === ''){
             ErrorMessge({message:'please enter your mother tongue'})
@@ -24,7 +27,7 @@ const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => 
             formData.append("organization", e.target.organization.value);
 
             try{
-                const response =  await fetch('http://127.0.0.1:8000/userprofile/updateprofessionaldata/', {
+                const response =  await fetch('http://127.0.0.1:8000/userpreferences/updateprfessionalpreference/', {
                     method: "PATCH",
                     headers: {
                         'Authorization': 'Bearer ' + String(authTokens.access),
@@ -32,7 +35,7 @@ const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => 
                     body: formData
                 })
                 if (response.ok ){
-                    setDisplayComponent('userDetails')
+                    setComponent('userPreferences')
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -47,8 +50,9 @@ const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => 
                       
                       Toast.fire({
                         icon: 'success',
-                        title: 'prfessional details updated successfully'
+                        title: 'prfessional preferences updated successfully'
                       })
+
                 }else if (response.status === 400){
                     response.json()
                     .then(data =>{
@@ -78,20 +82,20 @@ const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => 
         }
     }
 
-
     useEffect(()=>{
         setDegreesList(obj.degrees);
     }, [])
   return (
-    <div class="rounded-lg border m-3 shadow-sm border-y-zinc-950 p-4 md:p-8 flex items-center justify-center">
-        <form class="w-full max-w-lg" onSubmit={updateProfessionalDetails}>
-            <h3 class="text-lg font-semibold text-[#a43f75] text-center">Update Professional Details</h3>
+    <>
+        <div class="rounded-lg border bg-white m-3 shadow-sm border-y-zinc-950 p-4 md:p-8 flex items-center justify-center">
+        <form class="w-full max-w-lg" onSubmit={updateProfessionalPreferences} >
+            <h3 class="text-lg font-semibold text-[#a43f75] text-center">Update Professional Preferences</h3>
 
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full px-3 mb-6 md:mb-0">
                     <label for="education" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Education</label>
                     <select name="education" id="education" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value={professionalDetails ? professionalDetails.education : ''}>{professionalDetails ? professionalDetails.education : 'Select educational qualification'}</option>
+                        <option value={professionalPreference ? professionalPreference.education : ''}>{professionalPreference ? professionalPreference.education : 'Select educational qualification'}</option>
                         {degreesList.map((degree) => (
                             <option key={degree} value={degree}>
                                 {degree}
@@ -104,7 +108,7 @@ const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => 
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full px-3">
                     <label for="college" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">College</label>
-                    <input type="text" name="college" id="college" defaultValue={professionalDetails?.college} placeholder={professionalDetails?.college ? professionalDetails.college : 'Enter your college name'} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-1 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800" />
+                    <input type="text" name="college" id="college" defaultValue={professionalPreference?.college} placeholder={professionalPreference?.college ? professionalPreference.college : 'Enter your college name'} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-1 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800" />
                 </div>
             </div>
 
@@ -112,7 +116,7 @@ const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => 
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label for="working_sector" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Working Sector</label>
                     <select name="working_sector" id="working_sector" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value={professionalDetails ? professionalDetails.working_sector : ''}>Select your working sector</option>
+                        <option value={professionalPreference ? professionalPreference.working_sector : ''}>{professionalPreference ? professionalPreference.working_sector : 'Select your working sector'}</option>
                         <option value="Government">Government/PSU</option>
                         <option value="Private">Private</option>
                         <option value="Business">Business</option>
@@ -125,7 +129,7 @@ const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => 
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label for="income" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Income (in LPA)</label>
                     <select name="income" id="income" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value={professionalDetails ? professionalDetails.income : ''}>{professionalDetails ? professionalDetails.income : 'Select your annual income'}</option>
+                        <option value={professionalPreference ? professionalPreference.income : ''}>{professionalPreference ? professionalPreference.income : 'Select your annual income'}</option>
                         <option value="0-1">0 - 1 LPA</option>
                         <option value="1-2">1 - 2 LPA</option>
                         <option value="2-3">2 - 3 LPA</option>
@@ -143,25 +147,25 @@ const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => 
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full px-3">
                     <label for="occupation" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Occupation</label>
-                    <input type="text" name="occupation" id="occupation" defaultValue={professionalDetails?.occupation} placeholder={professionalDetails? professionalDetails?.occupation : 'Enter your occupation'} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-1 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800" />
+                    <input type="text" name="occupation" id="occupation" defaultValue={professionalPreference?.occupation} placeholder={professionalPreference? professionalPreference?.occupation : 'Enter your occupation'} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-1 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800" />
                 </div>
             </div>
 
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full px-3">
                     <label for="organization" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Organization</label>
-                    <input type="text" name="organization" id="organization" defaultValue={professionalDetails?.organization} placeholder={professionalDetails? professionalDetails?.organization : 'Enter your working organization'} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-1 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800" />
+                    <input type="text" name="organization" id="organization" defaultValue={professionalPreference?.organization} placeholder={professionalPreference? professionalPreference?.organization : 'Enter your working organization'} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-1 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800" />
                 </div>
             </div>
 
             <div class="flex justify-between">
-                <button class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-1  px-4 rounded" type="submit">Update</button>
-                <p onClick={() => setDisplayComponent('userDetails')} class="bg-[#621a40]  hover:bg-[#a43f75] cursor-pointer text-white font-boldy py-2 px-3 rounded">Back to user profile</p>
+                <button class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-1 px-4 rounded" type="submit">Update</button>
+                <p onClick={() => setComponent('userPreferences')} class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Back to user profile</p>
             </div>
         </form>
     </div>
-
+    </>
   )
 }
 
-export default EditProfessionalDetails
+export default EditProfessionalPreference

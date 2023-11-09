@@ -3,141 +3,121 @@ import { ErrorMessge } from '../../alerts/UserAuthentication';
 import AuthContext from '../../context/AuthContext';
 
 
-const UserDetails = ({setDisplayComponent, basicDetails}) => {
+const UserDetails = ({setDisplayComponent, basicDetails, religionalDetails, professionalDetails}) => {
 
     let {authTokens} = useContext(AuthContext)
-    let professionalDetails = null
-    let relegionalDetails = null
+
 
   return (
-<div className="p-2 md:p-8 flex mx-0 md:mx-3 flex-wrap">
-        <div className="w-full md:w-1/2 md:p-8  border rounded-lg border-zinc-950">
-          <div className=''>
-            <div className="flex justify-between items-center p-3">
-              <h3 className="text-xl  font-semibold text-[#a43f75]">Basic Details</h3>
-              <p onClick={() => setDisplayComponent('editBasicDetails')} className="bg-[#621a40] hover-bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
+    <>
+
+<div class="bg-gray-100">
+        <div class="container mx-auto py-8">
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 px-4 ">
+                <div class="col-span-1 sm:col-span-6">
+
+                  <div class="bg-white shadow-xl rounded-2xl px-3 py-4">
+                    <div className="flex justify-between items-center px-3 ">
+                        <h3 className="text-xl  font-semibold text-[#a43f75]">Basic Details</h3>
+                        <p onClick={() => setDisplayComponent('editBasicDetails')} className="bg-[#621a40] hover-bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
+                    </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2 text-gray-600  ">
+                                    <div class="text-right pr-3">
+                                        <p><strong>Age :</strong></p>
+                                        <p><strong>Mother Tongue :</strong></p>
+                                        <p><strong>Eating Habit :</strong></p>
+                                        <p><strong>Drinking Habit :</strong></p>
+                                        <p><strong>Smoking Habit :</strong></p>
+                                        <p><strong>Martial Status :</strong></p>
+                                        <p><strong>Physical Type :</strong></p>
+                                        <p><strong>Physical Status :</strong></p>
+                                        <p><strong>Location :</strong></p>
+                                        <p><strong>Citizenship :</strong></p>
+                                    </div>
+                                    <div class="px-3">
+
+                                        {basicDetails?.age ? <p>{basicDetails?.age}</p> : <p> Not added yet</p> }
+                                        {basicDetails?.mother_tongue ? <p>{basicDetails?.mother_tongue}</p> : <p> Not added yet</p> }
+                                        {basicDetails?.eating_habit ? <p>{basicDetails?.eating_habit}</p> : <p> Not added yet</p> }
+                                        {basicDetails?.drinking_habit ? <p>{basicDetails?.drinking_habit}</p> : <p> Not added yet</p> }
+                                        {basicDetails?.smoking_habit ? <p>{basicDetails?.smoking_habit}</p> : <p> Not added yet</p> }
+                                        {basicDetails?.martial_status ? <p>{basicDetails?.martial_status}</p> : <p> Not added yet</p> }
+                                        {basicDetails?.height||basicDetails?.body_type ? <p>{basicDetails?.height}  ({basicDetails?.body_type})</p> : <p> Not added yet</p> }
+                                        {basicDetails?.physical_status ? <p>{basicDetails?.physical_status}</p> : <p> Not added yet</p> }
+                                        {basicDetails?.location ? <p>{basicDetails?.location}</p> : <p> Not added yet</p> }
+                                        {basicDetails?.citizenship ? <p>{basicDetails?.citizenship}</p> : <p> Not added yet</p> }
+
+                                        
+                                    </div>
+                                </div>
+                        <hr class="my-6 border-t border-gray-300" />
+                  </div>
+                </div>
+
+                <div class="col-span-1 sm:col-span-6">
+                    <div class="bg-white shadow-xl rounded-2xl p-6">
+
+                      <div className="flex justify-between items-center px-3">
+                          <h3 className="text-xl  font-semibold text-[#a43f75]">Professional Details</h3>
+                          <p onClick={() => setDisplayComponent('editProfessionalDetails')} className="bg-[#621a40] hover-bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
+                      </div>
+                      <div class=" grid grid-cols-2 gap-2 text-gray-600 ">
+                                    <div class="text-right pr-3">
+                                        <p><strong>Education :</strong></p>
+                                        <p><strong>College :</strong></p>
+                                        <p><strong>Working Sector :</strong></p>
+                                        <p><strong>Income (LPA) :</strong></p>
+                                        <p><strong>Occupation :</strong></p>
+                                        <p><strong>Organization :</strong></p>
+                                    </div>
+                                    <div class="px-3">
+
+                                      {professionalDetails?.education ? <p>{professionalDetails?.education}</p> : <p> Not added yet</p> }
+                                      {professionalDetails?.college ? <p>{professionalDetails?.college}</p> : <p> Not added yet</p> }
+                                      {professionalDetails?.working_sector ? <p>{professionalDetails?.working_sector}</p> : <p> Not added yet</p> }
+                                      {professionalDetails?.income ? <p>{professionalDetails?.income}</p> : <p> Not added yet</p> }
+                                      {professionalDetails?.occupation ? <p>{professionalDetails?.occupation}</p> : <p> Not added yet</p> }
+                                      {professionalDetails?.organization ? <p>{professionalDetails?.organization}</p> : <p> Not added yet</p> }
+   
+                                    </div>
+                                </div>
+                    </div>
+
+                    <div class="bg-white shadow-xl rounded-2xl mt-2 p-6">
+
+                      <div className="flex justify-between items-center px-3">
+                          <h3 className="text-xl  font-semibold text-[#a43f75]">Religional Details</h3>
+                          <p onClick={() => setDisplayComponent('editReligionalDetails')} className="bg-[#621a40] hover-bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
+                      </div>
+                      <div class=" grid grid-cols-2 gap-2 text-gray-600 ">
+                                    <div class="text-right pr-3">
+                                        <p><strong>Religion :</strong></p>
+                                        <p><strong>Caste :</strong></p>
+                                        <p><strong>Star :</strong></p>
+
+                                    </div>
+                                    <div class="px-3">
+
+                                      {religionalDetails?.religion ? <p>{religionalDetails?.religion}</p> : <p> Not added yet</p> }
+                                      {religionalDetails?.caste ? <p>{religionalDetails?.caste}</p> : <p> Not added yet</p> }
+                                      {religionalDetails?.star ? <p>{religionalDetails?.star}</p> : <p> Not added yet</p> }
+
+                                    </div>
+                                </div>
+                    </div>
+                </div>
             </div>
-            <div className='mr-20'>
-              <ul className="text-gray-600">
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Age:</span>
-                  {basicDetails ? <span className="font-normal text-base">{basicDetails?.age}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Mother Tongue:</span>
-                  {basicDetails ? <span className="font-normal text-base">{basicDetails?.mother_tongue}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Eating habit:</span>
-                  {basicDetails ? <span className="font-normal text-base">{basicDetails?.eating_habit}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Drinking habits:</span>
-                  {basicDetails ? <span className="font-normal text-base">{basicDetails?.drinking_habit}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Smoking habits:</span>
-                  {basicDetails ? <span className="font-normal text-base">{basicDetails?.smoking_habit}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Marital status:</span>
-                  {basicDetails ? <span className="font-normal text-base">{basicDetails?.martial_status }</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">physical type:</span>
-                  {basicDetails ? <span className="font-normal text-base">{basicDetails?.height}  ({basicDetails?.body_type})</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-base">physical status:</span>
-                  {basicDetails ? <span className="font-normal text-base">{basicDetails?.physical_status }</span>  : <span>Not added</span>}
-
-                </li>   
-
-              </ul>
-            </div>
-          </div>
         </div>
-
-        <div className="w-full md:w-1/2 p-4 md:p-8 border rounded-xl  border-zinc-950">
-
-          <div className=''>
-            <div className="flex justify-between items-center p-3">
-              <h3 className="text-xl  font-semibold text-[#a43f75]">Professional Details</h3>
-              <p onClick={() => setDisplayComponent('editProfessionalDetails')} className="bg-[#621a40] hover-bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
-            </div>
-            <div className='mr-20'>
-              <ul className="text-gray-600">
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Education :</span>
-                  {professionalDetails ? <span className="font-normal text-base">{professionalDetails?.education}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Education in detail :</span>
-                  {professionalDetails ? <span className="font-normal text-base">{professionalDetails?.educationDetail}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">College :</span>
-                  {professionalDetails ? <span className="font-normal text-base">{professionalDetails?.college}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Working sector :</span>
-                  {professionalDetails ? <span className="font-normal text-base">{professionalDetails?.working_sector}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Income (LPA) :</span>
-                  {professionalDetails ? <span className="font-normal text-base">{professionalDetails?.income}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Occupation :</span>
-                  {professionalDetails ? <span className="font-normal text-base">{professionalDetails?.occupation}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Organization :</span>
-                  {professionalDetails ? <span className="font-normal text-base">{professionalDetails?.organization}</span> : <span>Not added</span>}
-                </li>
-
-              </ul>
-            </div>
-          </div>
-
-          <div className=''>
-            <div className="flex justify-between items-center p-3">
-              <h3 className="text-xl  font-semibold text-[#a43f75]">Professional Details</h3>
-              <p onClick={() => setDisplayComponent('editBasicDetails')} className="bg-[#621a40] hover-bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
-            </div>
-            <div className='mr-20'>
-              <ul className="text-gray-600">
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Religion :</span>
-                  {relegionalDetails ? <span className="font-normal text-base">{relegionalDetails?.religion}</span> : <span>Not added</span>}
-                </li>
-
-                <li className="flex justify-between space-x-2">
-                  <span className="font-bold text-md">Cast :</span>
-                  {relegionalDetails ? <span className="font-normal text-base">{relegionalDetails?.cast}</span> : <span>Not added</span>}
-                </li>
+    </div>
 
 
 
-              </ul>
-            </div>
-          </div>
 
-        </div>
-      </div>
+
+    
+    
+    </>
+
   )
 }
 

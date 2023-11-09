@@ -6,6 +6,8 @@ import UserDetails from '../../components/userProfile/UserDetails';
 import EditBasicDetails from '../../components/userProfile/EditBasicDetails';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import EditProfessionalDetails from '../../components/userProfile/EditProfessionalDetails';
+import EditReligionalDetails from '../../components/userProfile/EditReligionalDetails';
+import Preferences from '../../components/userProfile/userPreference/Preferences';
 
 
 const UserProfile = () => {
@@ -18,6 +20,7 @@ const UserProfile = () => {
   let [userProfile, serUserProfile] = useState(null)
   let [basicDetails, setBasicDetails] = useState(null)
   let [professionalDetails, setProfessionalDetails] = useState(null)
+  let [religionalDetails, setReligionalDetails] = useState(null)
 
   const getUserProfile = async () => {
       try {
@@ -58,7 +61,7 @@ const UserProfile = () => {
             let data = await response.json();
             setBasicDetails(data)
         }else if (response.status === 400){
-            ErrorMessge({message:'table not created'})
+            ErrorMessge({message:'basic details table not created'})
             
         }
 
@@ -81,7 +84,7 @@ const UserProfile = () => {
         let data = await response.json()
         setProfessionalDetails(data)
       }else if (response.status === 400){
-        ErrorMessge({message:'table not created'})
+        ErrorMessge({message:'professional not addedd'})
       }else{
         alert("An error occurred");
       }
@@ -89,6 +92,32 @@ const UserProfile = () => {
       console.error("error ::", error)
     }
   }
+
+
+  const getReligionalDetails = async () =>{
+    try{
+      let response = await fetch('http://127.0.0.1:8000/userprofile/getreligionaldetails/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authTokens.access, 
+        },
+      })
+      if (response.status === 200){
+        let data = await response.json()
+        setReligionalDetails(data)
+        
+      }else if (response.status === 400){
+        ErrorMessge({message:'religious details not addedd'})
+      }else{
+        alert("An error occurred");
+      }
+    }catch (error){
+      console.error("error ::", error)
+    }
+  }
+
+  
 
   const changeComponent = () =>{
     if (currentComponent === 'UserProfileDetails'){
@@ -101,13 +130,16 @@ const UserProfile = () => {
 
   const ChangeUserDetailComponents = () =>{
     if (displayComponent === 'userDetails'){
-      return <UserDetails basicDetails={basicDetails} setDisplayComponent = { setDisplayComponent } />
+      return <UserDetails basicDetails={basicDetails} religionalDetails={religionalDetails} professionalDetails={professionalDetails} setDisplayComponent = { setDisplayComponent } />
 
     }else if (displayComponent === 'editBasicDetails'){
       return <EditBasicDetails basicDetails={basicDetails} setDisplayComponent = { setDisplayComponent } />
 
     }else if (displayComponent === 'editProfessionalDetails'){
       return <EditProfessionalDetails professionalDetails = {professionalDetails}  setDisplayComponent={setDisplayComponent}/>
+
+    }else if (displayComponent === 'editReligionalDetails'){
+      return <EditReligionalDetails religionalDetails = {religionalDetails}  setDisplayComponent={setDisplayComponent}/>
     }
 
   }
@@ -116,6 +148,8 @@ const UserProfile = () => {
       getUserProfile();
       getBasicDetails();
       getProfesssionalDetails();
+      getReligionalDetails();
+      
       
   }, [])
 
@@ -123,6 +157,7 @@ const UserProfile = () => {
     <div>
       { changeComponent() }
       { ChangeUserDetailComponents() }
+      <Preferences />
     </div>
 
   )

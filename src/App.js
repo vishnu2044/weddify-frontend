@@ -8,8 +8,10 @@ import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-
 import Signup from './components/frontPage/Signup'
 import Login from './components/frontPage/Login';
 import UserProfile from './pages/userProflile/UserProfile';
-import HomeField from './pages/userProflile/HomeField';
+import HomeField from './components/homePage/HomeField';
 import EditProfile from './components/userProfile/EditProfile';
+import AllMatches from './pages/matches/AllMatches';
+import MatchProfile from './components/matches/MatchProfile';
 
 function App() {
   
@@ -26,7 +28,9 @@ function App() {
               <Route Component={EditProfile} path='editProfile'/>
             </Route>
 
-            <Route Component={HomeField} path='homefield'/>
+            <Route Component={HomeField} path='homefield' />
+            <Route Component={AllMatches} path='matches' />
+            <Route Component={MatchProfile} path='matchprofile' />
           </Route>
         </Routes>
       </AuthProvider>

@@ -1,0 +1,10 @@
+{
+    "any": ["any"],
+    "Hindu": ["any","Brahmin", "Kshatriya", "Vaishya", "Shudra"],
+    "Islam": ["any","Abbasid", "Alawite", "Ansari", "Arab", "Baloch"],
+    "Sikhism": ["any","Jat", "Khatri"],
+    "Christianity": ["any","Roman Catholic", "Protestant"],
+    "Buddhism": ["any","Theravada", "Mahayana"],
+    "Jainism": ["any","Digambara", "Shvetambara"]
+  }
+

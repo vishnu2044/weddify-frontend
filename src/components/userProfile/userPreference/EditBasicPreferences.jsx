@@ -1,93 +1,97 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { ErrorMessge } from '../../alerts/UserAuthentication'
-import AuthContext from '../../context/AuthContext'
+import React, { useContext, useEffect, useState } from 'react';
+import objects from '../../../jsonData/cities.json';
+import AuthContext from '../../../context/AuthContext';
+import { ErrorMessge } from '../../../alerts/UserAuthentication';
 import Swal from 'sweetalert2';
-import objects from '../../jsonData/cities.json';
 
-const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
+function isInteger(value) {
+    return value.isInteger
+}
 
-    let {authTokens, logoutUser} = useContext(AuthContext)
+const EditbasicPreference = ({basicPreference, setComponent}) => {
     let [citiesList, setCitiesList] = useState([])
-
-    let updateBasicDetails = async (e) =>{
-        e.preventDefault()
-        if (e.target.mother_tongue.value === ''){
-            ErrorMessge({message:'please enter your mother tongue'})
-        }else{
-            let formData = new FormData
-            formData.append('mother_tongue', e.target.mother_tongue.value);
-            formData.append('eating_habit', e.target.eating_habit.value);
-            formData.append('drinking_habit', e.target.drinking_habit.value);
-            formData.append('smoking_habit', e.target.smoking_habit.value);
-            formData.append('martial_status', e.target.martial_status.value);
-            formData.append('height', e.target.height.value);
-            formData.append('body_type', e.target.body_type.value);
-            formData.append('physical_status', e.target.physical_status.value);
-            formData.append('location', e.target.location.value);
-            formData.append('citizenship', e.target.citizenship.value);
-
-            try{
-                const response = await fetch("http://127.0.0.1:8000/userprofile/updatebasicdetails/", {
-                    method: "PATCH",
-                    headers: {
-                        
-                        'Authorization': 'Bearer ' + String(authTokens.access),
-                    },
-                    body: formData,
-                })
-                if (response.ok){
-                    setDisplayComponent("userDetails")
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 2000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                          toast.addEventListener('mouseenter', Swal.stopTimer)
-                          toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                      })
-                      
-                      Toast.fire({
-                        icon: 'success',
-                        title: 'Basic details updated successfully'
-                      })
-                }else if (response.status === 400){
-                    response.json()
-                    .then(data => {
-                        if (data.error) {
-                            ErrorMessge({message: data.error })
-                        } else {
-                            alert('An error occurred');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error parsing response:', error);
-                        alert('An error occurred while processing the response');
-                    });
-                }else if(response.status === 401){
-                    alert("authenticaton failed")
-                    return logoutUser
-                }else{
-                    alert("updation failed")
-                    console.log(response.error);
-                }
-            }catch (error){
-                console.error("an error comes !!!!!!!!!!", error);
-                alert("catched an error look console")
+    let {authTokens, logoutUser} = useContext(AuthContext)
+    
+    let updateBasicpreference = async (e) => {
+        console.log("age form :::::::::::::::::::::::::::::::::::::::::::",e.target.age_from.value)
+        e.preventDefault();
+        if (e.target.age_from.value < 18) {
+            ErrorMessge({ message: "The minimum age should be greater than 18" });
+        } else if (e.target.age_to.value < 18 || e.target.age_from.value > e.target.age_to.value ) {
+            ErrorMessge({ message: "maximum age should be greater than minimum age" });
+        } else {
+          let formData = new FormData();
+          formData.append('mother_tongue', e.target.mother_tongue.value);
+          formData.append("eating_habit", e.target.eating_habit.value);
+          formData.append("drinking_habit", e.target.drinking_habit.value);
+          formData.append("smoking_habit", e.target.smoking_habit.value);
+          formData.append("martial_status", e.target.martial_status.value);
+          formData.append("age_from", e.target.age_from.value);
+          formData.append("age_to", e.target.age_to.value);
+          formData.append("citizenship", e.target.citizenship.value);
+          formData.append("location", e.target.location.value);
+          formData.append("height", e.target.height.value);
+          formData.append("body_type", e.target.body_type.value);
+          console.log("form data ::::::::::::::::::::", formData);
+      
+          try {
+            let response = await fetch("http://127.0.0.1:8000/userpreferences/updatebasicpreferences/", {
+              method: "PATCH",
+              headers: {
+                'Authorization': 'Bearer ' + String(authTokens.access),
+              },
+              body: formData
+            });
+      
+            if (response.ok) {
+                setComponent("userPreferences")
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                  
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'religional details updated successfully'
+                  })
+            } else if (response.status === 400) {
+              const data = await response.json();
+              if (data.error) {
+                ErrorMessge({ message: data.error });
+              } else {
+                ErrorMessge({ message: "An error occurred" });
+              }
+            } else if (response.status === 401) {
+              logoutUser();
+            } else {
+                ErrorMessge({ message: "Error message" });
             }
+      
+          } catch (error) {
+            console.error("An error occurred !!!!!!", error);
+            ErrorMessge({ message: "An error occurred" });
+          }
         }
-    }
+      }
+      
+
     useEffect(()=>{
         setCitiesList(objects.mandals)
     })
   return (
-    <div className=" rounded-lg border m-3 shadow-sm border-y-zinc-950 p-4 md:p-8 flex items-center justify-center ">
+   
+    <div className=" rounded-lg border m-3 shadow-sm bg-white border-y-zinc-950 p-4 md:p-8 flex items-center justify-center ">
         
 
-        <form class="w-full max-w-lg" onSubmit={updateBasicDetails}>
-        <h3 className="text-lg font-semibold text-[#a43f75] text-center">Basic Details</h3>
+        <form class="w-full max-w-lg" onSubmit={updateBasicpreference} >
+        <h3 className="text-lg font-semibold text-[#a43f75] text-center">Edit Basic Preferences</h3>
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full px-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
@@ -96,8 +100,8 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                     <input  
                         type="text"
                         name='mother_tongue'
-                        defaultValue={basicDetails?.mother_tongue}
-                        placeholder={basicDetails?.mother_tongue ?basicDetails?.mother_tongue : "enter your mother tongue"}
+                        defaultValue={basicPreference?.mother_tongue}
+                        placeholder={basicPreference?.mother_tongue ?basicPreference?.mother_tongue : "enter your mother tongue"}
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-1 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800"   
                     />
                 </div>
@@ -109,7 +113,7 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                         eatiing habit
                     </label>
                     <select  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='eating_habit' >
-                        <option value={basicDetails? basicDetails?.eating_habit: ""} >{basicDetails? basicDetails?.eating_habit: "Select your eating habit"}</option>
+                        <option value={basicPreference? basicPreference?.eating_habit: ""} >{basicPreference? basicPreference?.eating_habit: "Select your eating habit"}</option>
                         <option value="vegetarian">Vegetarian</option>
                         <option value="non-vegetarian">Non vegetarian</option>
                         <option value="eggetarian">Eggetarian</option>
@@ -122,7 +126,7 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                         Drinking habit
                     </label>
                     <select  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='drinking_habit' >
-                    <option value={basicDetails? basicDetails?.drinking_habit: ""} >{basicDetails? basicDetails?.drinking_habit: "Select your drinking habit"}</option>
+                    <option value={basicPreference? basicPreference?.drinking_habit: ""} >{basicPreference? basicPreference?.drinking_habit: "Select your drinking habit"}</option>
                         <option value="teetotaler"> teetotaler</option>
                         <option value="social-drinkers">Social drinker</option>
                         <option value="moderate-drinker">Moderate drinker</option>
@@ -137,7 +141,7 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                         Smoking habit
                     </label>
                     <select  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='smoking_habit' >
-                    <option value={basicDetails? basicDetails?.smoking_habit: ""} >{basicDetails? basicDetails?.smoking_habit: "Select your smoking habit"}</option>
+                    <option value={basicPreference? basicPreference?.smoking_habit: ""} >{basicPreference? basicPreference?.smoking_habit: "Select your smoking habit"}</option>
                         <option value="nonsmoker">Nonsmoker</option>
                         <option value="former-smoker">Former smoker</option>
                         <option value="occasionally">Occasionally</option>
@@ -151,7 +155,7 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                         martial status
                     </label>
                     <select  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='martial_status' >
-                    <option value={basicDetails? basicDetails?.martial_status: ""} >{basicDetails? basicDetails?.martial_status: "Select your martial status"}</option>
+                    <option value={basicPreference? basicPreference?.martial_status: ""} >{basicPreference? basicPreference?.martial_status: "Select your martial status"}</option>
                         <option value="Never-married">Never married</option>
                         <option value="widowed">widowed</option>
                         <option value="divorced">divorced</option>
@@ -160,34 +164,35 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                 </div>
             </div>
 
-            {/* <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-gender">
-                        Smoking habit
+
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        minimum age
                     </label>
-                    <select  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='smoking_habit' >
-                    <option value={basicDetails? basicDetails?.citizenship: ""} >{basicDetails? basicDetails?.citizenship: "Select your smoking habit"}</option>
-                        <option value="nonsmoker">Nonsmoker</option>
-                        <option value="former-smoker">Former smoker</option>
-                        <option value="occasionally">Occasionally</option>
-                        <option value="regular-smoker">regular smoker</option>
-                    </select>
+                    <input  
+                        type="text"
+                        name='age_from'
+                        defaultValue={basicPreference?.age_from}
+                        placeholder={basicPreference?.age_from ? basicPreference?.age_from : "enter your prefered age from"}
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3  mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800"   
+                    />
+
                 </div>
-
-
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-gender">
-                        martial status
+
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
+                        maximum age
                     </label>
-                    <select  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='martial_status' >
-                    <option value={basicDetails? basicDetails?.martial_status: ""} >{basicDetails? basicDetails?.martial_status: "Select your martial status"}</option>
-                        <option value="Never-married">Never married</option>
-                        <option value="widowed">widowed</option>
-                        <option value="divorced">divorced</option>
-                        
-                    </select>
+                    <input  
+                        type="text"
+                        name='age_to'
+                        defaultValue={basicPreference?.age_to}
+                        placeholder={basicPreference?.age_to ?basicPreference?.age_to : "enter your prefered age upto"}
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3  mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800"   
+                    />
                 </div>
-            </div> */}
+            </div>
 
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -197,8 +202,8 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                     <input  
                         type="text"
                         name='citizenship'
-                        defaultValue={basicDetails?.citizenship}
-                        placeholder={basicDetails?.citizenship ?basicDetails?.citizenship : "enter your country"}
+                        defaultValue={basicPreference?.citizenship}
+                        placeholder={basicPreference?.citizenship ?basicPreference?.citizenship : "enter your country"}
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-1 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800"   
                     />
                 </div>
@@ -209,7 +214,7 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                         City
                     </label>
                     <select name="location" id="location" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value={basicDetails ? basicDetails.location : ''}>{basicDetails ? basicDetails.location : 'Select your location'}</option>
+                        <option value={basicPreference ? basicPreference.location : ''}>{basicPreference ? basicPreference.location : 'Select your location'}</option>
                         {citiesList.map((location) => (
                             <option key={location} value={location}>
                                 {location}
@@ -227,8 +232,8 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                 <input  
                     type="text"
                     name='height'
-                    defaultValue={basicDetails?.height}
-                    placeholder={basicDetails?.height ?basicDetails?.height : "enter your height"}
+                    defaultValue={basicPreference?.height}
+                    placeholder={basicPreference?.height ?basicPreference?.height : "enter your height"}
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-1 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-800" />
                 </div>
 
@@ -238,7 +243,7 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                         body type
                     </label>
                     <select  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='body_type' >
-                    <option value={basicDetails? basicDetails?.body_type: ""} >{basicDetails? basicDetails?.body_type: "Select your body type"}</option>
+                    <option value={basicPreference? basicPreference?.body_type: ""} >{basicPreference? basicPreference?.body_type: "Select your body type"}</option>
                         <option value="slim">Slim</option>
                         <option value="athletic">Athletic</option>
                         <option value="average">Average</option>
@@ -254,7 +259,7 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                             Physical status
                     </label>
                     <select  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='physical_status' >
-                        <option value={basicDetails? basicDetails?.physical_status: ""} >{basicDetails? basicDetails?.physical_status: "Select your physical status"}</option>
+                        <option value={basicPreference? basicPreference?.physical_status: ""} >{basicPreference? basicPreference?.physical_status: "Select your physical status"}</option>
                         <option value="normal">normal</option>
                         <option value="physically-challenged">Physically Challenged</option>
                     </select>
@@ -269,14 +274,13 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
 
             <div className='flex justify-between'>
                 <button className='bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-1 px-4 rounded' type='submit'>Update</button>
-                <p onClick={() => setDisplayComponent('userDetails')} className='bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded' >Back to user profile</p>
+                <p onClick={()=>setComponent("userPreferences")} className='bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded' >Back to user profile</p>
             </div>
         </form>
 
 
     </div>
-
   )
 }
 
-export default EditBasicDetails
+export default EditbasicPreference

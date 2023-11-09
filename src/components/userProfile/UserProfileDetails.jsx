@@ -29,7 +29,9 @@ const UserProfileDetails = ({userProfile, user, setCurrentComponent}) => {
                                 </div>
                                 <div class="mt-2 flex flex-wrap gap-4 justify-center">
                                     <p class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white py-2 px-3 rounded">Premium</p>
-                                    <p class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white py-2 px-4 rounded">Logout</p>
+                                    <p
+                                        onClick={logoutUser}
+                                     class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white py-2 px-4 rounded">Logout</p>
                                 </div>
                                 
                             </div>

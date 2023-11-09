@@ -47,7 +47,7 @@ export const AuthProvider = ({children}) =>{
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
-            navigate('home', { replace: true })
+            navigate('home/homefield', { replace: true })
 
             const Toast = Swal.mixin({
                 toast: true,
