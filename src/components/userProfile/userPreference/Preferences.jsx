@@ -6,14 +6,16 @@ import EditBasicPreferences from './EditBasicPreferences'
 import { ErrorMessge } from '../../../alerts/UserAuthentication'
 import EditProfessionalPreference from './EditProfessionalPreference'
 import EditReligionalPreference from './EditReligiousPreference'
+import { useNavigate } from 'react-router-dom'
 
 const Preferences = () => {
   const [component, setComponent] = useState('userPreferences')
 
-  let {authTokens} = useContext(AuthContext)
+  let {authTokens, logoutUser} = useContext(AuthContext)
   let [basicPreference , setBasicPreference] = useState([])
   let [professionalPreference, setProfessionalPreference] = useState([])
   let [religiounalPreference, setReligiounalPreference] = useState([])
+  const navigate = useNavigate()
 
   const getBasicPreferences = async () =>{
     try{
@@ -30,11 +32,16 @@ const Preferences = () => {
         setBasicPreference(data)
       }
       else if (response.status === 401){
-        alert('Unauthorized : not access!!!')
+        ErrorMessge({message: "Unauthorized : not access"})
+        logoutUser()
         console.log(response.status);
       }
+      else if (response.status === 400){
+        ErrorMessge({message: "didnt added basic preferences"})
+        navigate("/home/userprofile")
+      }
       else{
-        alert("an error occurrect");
+        console.log("didnt get the basic preference details!!!")
         console.log(response.status);
       }
     } catch (error) {
@@ -58,9 +65,14 @@ const Preferences = () => {
       }
       else if (response.status === 401){
         alert('Unauthorized : not access!!!')
+        logoutUser()
         console.log(response.status);
-      }
-      else{
+      }else if (response.status === 400){
+        console.log("please add basic preference !!!")
+        navigate("/home/userprofile")
+        
+        console.log(response.status);
+      }else{
         alert("an error occurrect");
         console.log(response.status);
       }
@@ -86,6 +98,12 @@ const Preferences = () => {
       }
       else if (response.status === 401){
         alert('Unauthorized : not access!!!')
+        console.log(response.status);
+        logoutUser()
+      }
+      else if (response.status === 400){
+        console.log("didnt get the religional preference details!!!")
+        navigate("/home/userprofile")
         console.log(response.status);
       }
       else{

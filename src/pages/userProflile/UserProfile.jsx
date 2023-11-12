@@ -8,6 +8,9 @@ import { ErrorMessge } from '../../alerts/UserAuthentication';
 import EditProfessionalDetails from '../../components/userProfile/EditProfessionalDetails';
 import EditReligionalDetails from '../../components/userProfile/EditReligionalDetails';
 import Preferences from '../../components/userProfile/userPreference/Preferences';
+import VisitedProfiles from '../../components/userProfile/VisitedProfiles';
+import BlockedMatches from '../../components/userProfile/BlockedMatches';
+import ProfilesVisitedYous from '../../components/userProfile/ProfilesVisitedYous';
 
 
 const UserProfile = () => {
@@ -36,21 +39,28 @@ const UserProfile = () => {
               let data = await response.json();
               setUser(data);
               serUserProfile(data.user_profile)
-          } else if (response.status === 401) {
-              alert("Unauthorized: not success!!!");
+          } else if (response.status === 400) {
+            response.json()
+            .then(data =>{
+                if (data.error){
+                    ErrorMessge({message: data.error})
+                }else{
+                    console.log("user profile is not completed")
+                }
+            })
               console.log(response.status);
           } else {
-              alert("An error occurred");
+              alert("An error occurred while getting user profile");
           }
           
       } catch (error) {
-          console.error("An error occurred:", error);
+          console.error("An error occurred: while geting user profile", error);
       }
   }
 
   const getBasicDetails = async () =>{
     try{
-        let response = await fetch('http://127.0.0.1:8000/userprofile/userprofile/',{
+        let response = await fetch('http://127.0.0.1:8000/userprofile/getbasicdetails/',{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,12 +71,10 @@ const UserProfile = () => {
             let data = await response.json();
             setBasicDetails(data)
         }else if (response.status === 400){
-            ErrorMessge({message:'basic details table not created'})
-            
+          console.log('basic details didnt added');    
         }
-
     }catch(error){
-        console.error("error ::", error)
+        console.error("error geting while user basic details getting!!!!!!!!!::", error)
         
     }
   }
@@ -84,12 +92,12 @@ const UserProfile = () => {
         let data = await response.json()
         setProfessionalDetails(data)
       }else if (response.status === 400){
-        ErrorMessge({message:'professional not addedd'})
+        console.log("didnt get the professional details!!!")
       }else{
-        alert("An error occurred");
+        alert("An error occurred whil professional details add");
       }
     }catch (error){
-      console.error("error ::", error)
+      console.error("An error occurred whil professional details add", error)
     }
   }
 
@@ -108,12 +116,12 @@ const UserProfile = () => {
         setReligionalDetails(data)
         
       }else if (response.status === 400){
-        ErrorMessge({message:'religious details not addedd'})
+        console.log('religgious details didnt added'); 
       }else{
-        alert("An error occurred");
+        alert("An error occurred while religious details add");
       }
     }catch (error){
-      console.error("error ::", error)
+      console.error("An error occurred while religious details add   error ::", error)
     }
   }
 
@@ -122,9 +130,14 @@ const UserProfile = () => {
   const changeComponent = () =>{
     if (currentComponent === 'UserProfileDetails'){
       return <UserProfileDetails  user={user} userProfile={userProfile} setCurrentComponent = {setCurrentComponent} />
-      
     }else if(currentComponent === 'editUser'){
       return <EditProfile user={user} userProfile={userProfile} setCurrentComponent = {setCurrentComponent} />
+    }else if (currentComponent === 'visitedProfiles'){
+      return <VisitedProfiles setCurrentComponent = {setCurrentComponent}/>
+    }else if (currentComponent === 'blockedProfiles'){
+      return <BlockedMatches setCurrentComponent = {setCurrentComponent} />
+    }else if (currentComponent === 'profilesVisitedYOurs'){
+      return <ProfilesVisitedYous setCurrentComponent = {setCurrentComponent}/>
     }
   }
 

@@ -70,7 +70,7 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                     alert("authenticaton failed")
                     return logoutUser
                 }else{
-                    alert("updation failed")
+                    ErrorMessge({message: "basic details updation failed"})
                     console.log(response.error);
                 }
             }catch (error){

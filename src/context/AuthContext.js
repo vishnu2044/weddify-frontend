@@ -65,6 +65,9 @@ export const AuthProvider = ({children}) =>{
                 icon: 'success',
                 title: 'Signed in successfully'
               })
+              if(user === null){
+                console.log("dfsa")
+              }
             
         }else{
             console.log("OOPS!! Something went wrong!!")
@@ -205,18 +208,18 @@ export const AuthProvider = ({children}) =>{
             let response = await fetch('http://127.0.0.1:8000/userprofile/userdetails/', {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json', // Correct header field name
-                    'Authorization': 'Bearer ' + authTokens.access, // No need to wrap authTokens.access in String
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + authTokens.access,
                 }
             });
     
             if (response.status === 200) {
                 let data = await response.json();
                 setUser(data);
-            } else if (response.status === 401) { // Correct status code for Unauthorized
+            } else if (response.status === 401) {
                 alert("Unauthorized: not success!!!");
             } else {
-                alert("An error occurred"); // Handle other status codes as needed
+                alert("An error occurred"); 
             }
         } catch (error) {
             console.error("An error occurred:", error);

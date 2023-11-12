@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import AuthContext from '../../context/AuthContext';
 import getUserProfile from '../../pages/userProflile/UserProfile';
 import EditProfile from './EditProfile';
+import {AiOutlineHeart} from 'react-icons/ai';
 
 
 const UserProfileDetails = ({userProfile, user, setCurrentComponent}) => {
@@ -23,15 +24,12 @@ const UserProfileDetails = ({userProfile, user, setCurrentComponent}) => {
                                 <h1 class="text-xl font-bold">{user?.username}</h1>
                                 <br />
                                 <br />
-                                <div class="mt-6 flex flex-wrap gap-4 justify-center">
-                                    <p onClick={() => setCurrentComponent('editUser')} class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white py-2 px-3 rounded-lg">Update</p>
-                                    <p class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white py-2 px-3 rounded-lg">Preferences</p>
+                                <div class="mt-9 mb-7 pb-4 flex flex-wrap gap-4 justify-center">
+                                    <p onClick={() => setCurrentComponent('editUser')} class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white py-2 px-5 rounded-lg">Update</p>
+                                    
                                 </div>
                                 <div class="mt-2 flex flex-wrap gap-4 justify-center">
-                                    <p class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white py-2 px-3 rounded">Premium</p>
-                                    <p
-                                        onClick={logoutUser}
-                                     class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white py-2 px-4 rounded">Logout</p>
+                                    <p onClick={logoutUser} class="bg-[#621a40] hover:bg-[] cursor-pointer text-white py-2 px-5 rounded">Logout</p>
                                 </div>
                                 
                             </div>
@@ -77,6 +75,12 @@ const UserProfileDetails = ({userProfile, user, setCurrentComponent}) => {
                                     <br />
                                     
                                 </div>
+                            </div>
+                            <div class="mt-2 flex flex-wrap gap-4 justify-center">
+                                <p onClick={() => setCurrentComponent('blockedProfiles')} class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white py-2 px-3 rounded">Blocked matches</p>
+                                <p onClick={() => setCurrentComponent('visitedProfiles')} class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white py-2 px-3 rounded-lg">Visited profiles</p>
+                                <p onClick={logoutUser} class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white py-2 px-4 rounded">likes</p>
+                                <p onClick={logoutUser} class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white py-2 px-4 rounded">Logout</p>
                             </div>
                         </div>
                     </div>
