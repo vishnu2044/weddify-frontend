@@ -25,6 +25,9 @@ import { useNavigate } from 'react-router-dom'
                 }else if (response.status === 401){
                     ErrorMessge({message:"unauthorized : not success"})
                     console.log(response.status);
+                }else if (response.status === 400){
+                    ErrorMessge({message:"complete your profile"})
+                    navigate("/home/userprofile")
                 }else{
                     ErrorMessge({message: "and error comes!!"})
                     console.log(response.status)

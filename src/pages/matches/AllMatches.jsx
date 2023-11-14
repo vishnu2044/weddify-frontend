@@ -7,7 +7,6 @@ const AllMatches = () => {
     <>
       <FilterBar />
       <MatchesField />
-
     </>
   )
 }
