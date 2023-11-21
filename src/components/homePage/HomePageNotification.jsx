@@ -2,8 +2,15 @@ import React, {useState} from 'react';
 import ProfileVisitMatches from './notification/ProfileVisitMatches';
 
 
-const HomePageNotification = ({profileVisitedMatches, matchCount}) => {
+const HomePageNotification = ({
+    profileVisitedMatches, 
+    matchCount,
+    likedMatches,
+    likeCount
+
+ }) => {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+  const [isLikedPopUp, setILikedPopUp] = useState(false)
   
   const openPopup = () =>{
     if(isPopUpOpen === false){
@@ -13,11 +20,11 @@ const HomePageNotification = ({profileVisitedMatches, matchCount}) => {
     }
   };
 
-  const closePopUp = () =>{
-    if(isPopUpOpen === false){
-      setIsPopUpOpen(true)
+  const likePopUp = () =>{
+    if(isLikedPopUp === false){
+      setILikedPopUp(true)
     }else{
-      setIsPopUpOpen(false)
+      setILikedPopUp(false)
     }
   }
 
@@ -32,25 +39,35 @@ const HomePageNotification = ({profileVisitedMatches, matchCount}) => {
 
         <div class="flex-1 ">
             <p class="mb-3   text-base font-medium text-gray-600">Persons wisited your profile</p>
+            {
+              matchCount ?
             <span onClick={openPopup} class="flex cursor-pointer items-baseline text-sm font-bold mb-0">
               Check visited profiles
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </span>
+            :
+              <p></p>
+            }
         </div>
     </p>
 
     <p 
         class="flex bg-[#ffb8b8] flex-col p-4 space-y-2 transition-all duration-500  border border-indigo-100 rounded-lg shadow hover:shadow-xl lg:p-2 lg:flex-row lg:space-y-0 lg:space-x-3">
         <div class="flex items-center justify-center w-8 h-8 bg-white border pt-3  rounded-full shadow-md lg:h-12 lg:w-12">
-            <p class="text-center text-lg font-semibold">10</p>
+            <p class="text-center text-lg font-semibold">{likeCount.length > 0 ? likeCount : 0}</p>
         </div>
 
         <div class="flex-1">
             <p class="mb-3   text-base font-medium text-gray-600">Persons liked your profile</p>
-            <span  class="flex items-baseline text-sm font-bold mb-0">
+            {
+              likeCount.length >0 ?
+            <span onClick={likePopUp} class="flex items-baseline text-sm font-bold mb-0">
               Check liked profiles
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </span>
+            :
+              <p></p>
+            }
         </div>
     </p>
 
@@ -60,7 +77,10 @@ const HomePageNotification = ({profileVisitedMatches, matchCount}) => {
 </div>
 
 {
-  isPopUpOpen && <ProfileVisitMatches profileVisitedMatches={profileVisitedMatches} onClose ={closePopUp} />
+  isPopUpOpen && <ProfileVisitMatches profileVisitedMatches={profileVisitedMatches} onClose ={openPopup} />
+}
+{
+  isLikedPopUp && <ProfileVisitMatches likedMatches={likedMatches} onClose ={likePopUp} />
 }
     </>
 

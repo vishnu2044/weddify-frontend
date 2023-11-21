@@ -10,33 +10,69 @@ const HomeField = () => {
   let {authTokens, logoutUser} = useContext(AuthContext)
   let [profileVisitedMatches, setProfileVisitedMatches] = useState([])
   let [matchCount, setMatchCount] = useState([])
+  let [likedMatches, setLIkedMatches] = useState([])
+  let [likeCount, setLikeCount] = useState([])
   const navigate = useNavigate()
 
-  const getProfilesVisitedYours = async () =>{
-    try{
-      let response = await fetch('http://127.0.0.1:8000/preferedmatches/matchesviewedyours/', {
+
+
+  const getProfilesVisitedYours = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/preferedmatches/matchesviewedyours/', {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authTokens.access, 
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + authTokens.access,
         },
-      })
-      if (response.status === 200){
-        let data = await response.json()
-        setProfileVisitedMatches(data.data)
-        setMatchCount(data.match_count)
-      }else if (response.status === 400){
-        ErrorMessge({message:'professional not addedd'})
-      }else if (response.status === 401){
-        ErrorMessge({message:'Unauthorized logging out'})
-        logoutUser()
-      }else{
-        alert("An error occurred");
+      });
+  
+      if (response.status === 200) {
+        const data = await response.json();
+        setProfileVisitedMatches(data.data);
+        setMatchCount(data.match_count);
+      } else if (response.status === 400) {
+        ErrorMessge({ message: 'Professional not added' });
+      } else if (response.status === 401) {
+        ErrorMessge({ message: 'Unauthorized logging out' });
+        logoutUser();
+      } else {
+        alert('An error occurred');
       }
-    }catch (error){
-      console.error("error ::", error)
+    } catch (error) {
+      console.error('Error:', error);
     }
-  }
+  };
+
+  const getProfilesLikedMatches = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/preferedmatches/liked_you_matches/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + authTokens.access,
+        },
+      });
+  
+      if (response.status === 200) {
+        const data = await response.json();
+        setLIkedMatches(data.data);
+        console.log(":>:>:>:>:>:>:>",data.data)
+        setLikeCount(data.liked_count)
+
+      } else if (response.status === 400) {
+        console.log('no matches liked your profile')
+      } else if (response.status === 401) {
+        ErrorMessge({ message: 'Unauthorized logging out' });
+        logoutUser();
+      } else {
+        alert('An error occurred');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
+  
   
 
   const checkProfileCompleteHome = async () =>{
@@ -67,11 +103,13 @@ const HomeField = () => {
 
   useEffect(()=>{
     checkProfileCompleteHome()
+    getProfilesLikedMatches()
+    
   }, [])
 
   return (
     <div>
-      <HomePageNotification  profileVisitedMatches={profileVisitedMatches} matchCount={matchCount} />
+      <HomePageNotification  profileVisitedMatches={profileVisitedMatches} matchCount={matchCount} likedMatches={likedMatches} likeCount={likeCount}/>
       <LocationPreference />
       <NewMatches />
     </div>

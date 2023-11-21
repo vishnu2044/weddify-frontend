@@ -3,11 +3,11 @@ import AuthContext from '../../context/AuthContext';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import {AiOutlineHeart} from 'react-icons/ai';
 import { useNavigate, Link } from 'react-router-dom';
+import { all } from 'axios';
 
 
 
-const MatchesField = () => {
-    let [allMatch, setAllMatch] = useState([])
+const MatchesField = ({getAllMatches, allMatch}) => {
     let {authTokens, logoutUser} = useContext(AuthContext)
     let navigate = useNavigate()
 
@@ -102,32 +102,7 @@ const MatchesField = () => {
         }
     }
 
-    const getAllMatches = async () =>{
-        try{
-            let response = await fetch("http://127.0.0.1:8000/preferedmatches/getallmatches/",{
-                method: "GET",
-                headers :{
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + authTokens.access, 
-                }
-            });
-            if (response.status=== 200){
-                let data = await response.json();
-                setAllMatch(data);
-                console.log("all data :::::::::::::::::::::::::::",data)
-            }else if (response.status === 401){
-                logoutUser()
-                ErrorMessge({message:"unauthorized : not success"})
-                console.log(response.status);
-            }else{
-                ErrorMessge({message: "and error comes!!"})
-                console.log(response.status)
-            }
-            
-        }catch (error) {
-            console.error("An error occurred:", error);
-        }
-    }
+
 
     
 
@@ -139,10 +114,10 @@ const MatchesField = () => {
   return (
     <>
 
-
-    
-        <div className="flex flex-wrap  mt-3">
-            {
+        {
+            allMatch.length >0 ?
+        <div className="flex flex-wrap  mt-3 ">
+            { 
                 allMatch.map((match) => (
 
                     <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4 ">
@@ -171,9 +146,24 @@ const MatchesField = () => {
                         </div>
                     </div>  
 
-                ))
+                )) 
             }  
         </div>
+        :
+                <div class="p-1 mt-10">
+                <div class="bg-white w-1/2 mx-auto p-4 rounded-md shadow-lg ">
+                    <h1 class="text-2xl font-bold text-[#6471b1] mb-4 text-center">Sorry ! No data available</h1>
+                    <p class="text-gray-700 mb-4 text-center">Reset your filter</p>
+            
+                    <div class=" text-center">
+                        <p  onClick={()=>window.location.reload()}
+                            class="inline-block cursor-pointer bg-[#6471b1] py-2 px-4 text-white rounded-md font-semibold uppercase text-sm ">Ok
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    
     </>
 
 

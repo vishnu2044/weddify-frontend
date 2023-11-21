@@ -5,7 +5,14 @@ import { ErrorMessge } from '../../alerts/UserAuthentication';
 import cityObj from '../../jsonData/cities.json';
 import religionCasteData from '../../jsonData/religions.json';
 
-const FilterBar = () => {
+const FilterBar = ({
+    submitFilterData,
+    openPopup,
+    isPopUpOpen,
+    matchSearch
+
+
+}) => {
     let [religionaldata, setReligionaldata] = useState(null)
     let [professionaldata, setProfessionaldata] = useState(null)
     let [basicData, setBasicData]  =useState(null)
@@ -15,23 +22,10 @@ const FilterBar = () => {
     const [caste, setCaste] = useState('');
     const availableCastes = religionCasteData[religion] || []
 
-    const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+    
   
-    const openPopup = () =>{
-      if(isPopUpOpen === false){
-        setIsPopUpOpen(true)
-      }else{
-        setIsPopUpOpen(false)
-      }
-    };
-  
-    const closePopUp = () =>{
-      if(isPopUpOpen === false){
-        setIsPopUpOpen(true)
-      }else{
-        setIsPopUpOpen(false)
-      }
-    }
+
+
 
     const handleReligionChangeFilter = (e) =>{
         const selectedReligion = e.target.value;
@@ -75,56 +69,6 @@ const FilterBar = () => {
         }
     }
 
-    let submitFilterData = async(e) =>{
-        e.preventDefault();
-        if (e.target.age_from.value < 18){
-            ErrorMessge({message: "the minimum age should be greater than 18"})
-
-        }else{
-            let formData = new FormData();
-            formData.append('age_from', e.target.age_from.value)
-            formData.append('age_to', e.target.age_to.value)
-            formData.append('martial_status', e.target.martial_status.value)
-            formData.append('location', e.target.location.value)
-            formData.append('working_sector', e.target.working_sector.value)
-            formData.append('religion', e.target.religion.value)
-            formData.append('caste', e.target.caste.value)
-            console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",formData)
-
-            try{
-                let response = await fetch('http://127.0.0.1:8000/preferedmatches/filtering_matches/', {
-                    method : "PATCH",
-                    headers : {
-                        'Authorization' : 'Bearer ' + String(authTokens.access)
-                    },
-                    body: formData
-                })
-                
-                if (response.ok){
-                    ErrorMessge({message:"filter data passed successfully"})
-                    openPopup()
-                }else if (response.status === 400){
-                    const data = await response.json();
-                    if (data.error) {
-                      ErrorMessge({ message: data.error });
-                    } else {
-                      ErrorMessge({ message: "An error occurred" });
-                    }
-                }else if (response.status === 401){
-                    ErrorMessge({message : "authorization failed loggigng out"})
-                    logoutUser()
-                }else {
-                    ErrorMessge({message : "Error message"})
-                }
-
-            } catch (error) {
-                console.error("An error occurred !!!!!!", error);
-                ErrorMessge({ message: "An error occurred" });
-            }
-            
-        }
-
-    }
 
     useEffect(()=>{
         getFliterDetails()
@@ -137,7 +81,17 @@ const FilterBar = () => {
                 <ul className={`md:flex md:items-center transition-all duration-500 ease-in`}>
                     <li onClick={openPopup} className='bg-[#6471b1] md:my-0 my-3 md:mx-4 mx-20 hover-bg-[#a43f75] cursor-pointer text-white py-2 px-3 mt-2 rounded '>Filter</li>
                 </ul>
+                <form onSubmit={matchSearch} class="mt- mx-auto max-w-xl py-1 pl-3 pr-2 shadow-sm rounded-full bg-[#e5e8f5] border flex focus-within:border-gray-950">
+                    <input type="text" placeholder="Search match name or id" class="bg-transparent w-full focus:outline-none pr-5 px-5 font-semibold border-0 focus:ring-0 py-0" name="search_match" />
+                    <button
+                        className="py-1.5 px-5 text-center bg-[#6471b1] rounded-full text-white dark:bg-[#6471b1]"
+                        type="submit"
+                        >
+                            Search
+                    </button>
+                </form>
             </div>
+
         </div>
         {
             isPopUpOpen &&

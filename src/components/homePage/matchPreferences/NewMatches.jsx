@@ -20,7 +20,8 @@ const NewMatches = () => {
             if (response.status === 200){
                 let data = await response.json();
                 SetMatches(data)
-                console.log(data);
+
+                console.log("new matches data :::::::::::::::::::",data);
             }else if (response.status === 401){
                 ErrorMessge({message: "unauthorized : not success !!"})
                 logoutUser()
@@ -38,6 +39,8 @@ const NewMatches = () => {
     }, [])
   return (
 <div className=" h-screen">
+    {
+        matches.length > 3 ? 
     <div className="py-2 max-w-screen-xl mx-auto px-3 bg-[#EFF6FE] shadow-md rounded-md border border-solid border-gray-700">
         <div className="flex justify-between">
             <p className=" text-lg font-medium leading-7 text-[#621a40] font-regular">
@@ -50,7 +53,7 @@ const NewMatches = () => {
         <div className="grid grid-cols-3 col-gap-10">
 
             {
-                matches.slice(0,3).map((m)=>(
+                matches.slice(0, 3).map((m)=>(
                     <div className="text-center m-4">
                         <img 
                             className=" h-60 w-100 rounded-md object-cover object-center border border-solid border-gray-700 cursor-pointer" 
@@ -63,7 +66,7 @@ const NewMatches = () => {
                                 <p className=" text-gray-900  font-semibold">
                                     {m.first_name} {m.last_name}
                                 </p>
-                                <p className="text-gray-500 uppercase text-sm">Web developer</p>
+                                <p className="text-gray-500 uppercase text-sm">{m.occupation}</p>
                             </div>
                         </div>
                     </div>
@@ -73,7 +76,9 @@ const NewMatches = () => {
 
         </div>
 
-    </div>
+    </div>  : <p></p>
+    }
+
 </div>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProfileVisitMatches = ({onClose, likedMatches}) => {
+const ProfileLikedMatches = () => {
   return (
 <div class="flex place-items-start justify-center ">
     <div class="border rounded-lg shadow relative w-xl">
@@ -16,14 +16,14 @@ const ProfileVisitMatches = ({onClose, likedMatches}) => {
             <p className='font-semibold text-left'>visited profiles</p>
             <div className="max-w-screen-lg justify-between mx-auto">
                 {
-                    likedMatches.map((match)=>(
+                    profileVisitedMatches.map((match)=>(
 
                 <div className="p-3 my-2 flex items-center bg-[#EFF6FE] justify-between cursor-pointer rounded-md hover:bg-[#c5ddf9] border border-solid border-gray-700">
                     <div className="flex items-center">
                         <img className="rounded-full h-14 w-14" src={match?.profile_img ? `http://127.0.0.1:8000/${match.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" }    />
                         <div className="ml-2 flex flex-col">
                             <div className="leading-snug text-sm text-gray-900 font-bold">{match.first_name} {match.last_name}</div>
-                            <div className="leading-snug text-xs text-gray-600">{match.liked_time}</div>
+                            <div className="leading-snug text-xs text-gray-600">{match.visited_time}</div>
                         </div>
                     </div>
                     <div className='flex justify-between'>
@@ -37,8 +37,7 @@ const ProfileVisitMatches = ({onClose, likedMatches}) => {
     </div>
 </div>
 
-
   )
 }
 
-export default ProfileVisitMatches
+export default ProfileLikedMatches

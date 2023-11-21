@@ -23,6 +23,9 @@ function FrontPage() {
     }
   })
 
+  
+  
+
   return (
     <div>
       <Hero />

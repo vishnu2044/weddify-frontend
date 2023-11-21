@@ -21,6 +21,37 @@ export const AuthProvider = ({children}) =>{
     let [loading, setLoading] = useState(true)
 
 
+    let handleAdminLogin = async (e) => {
+        e.preventDefault();
+        if (isInputEmptyOrSpaces(e.target.username)){
+            ErrorMessge({message:"please enter user name"})
+        }
+        if (isInputEmptyOrSpaces(e.target.password)){
+            ErrorMessge({message:"please enter password"})
+        }
+        const response = await fetch('http://127.0.0.1:8000/adminpanel/admin_login/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            'username':e.target.username.value, 
+            'password':e.target.password.value 
+            }),
+
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setUser(jwt_decode(data.access))
+          localStorage.setItem('authTokens', JSON.stringify(data))
+          navigate('adminpanel/admindashboard', { replace: true })
+
+        } else {
+          console.error('Login failed');
+        }
+    };
+
     let loginUser = async (event) =>{
 
         event.preventDefault();
@@ -114,7 +145,7 @@ export const AuthProvider = ({children}) =>{
     let signupUser = async (e) =>{
         e.preventDefault()
         
-        // Form Validation.
+
         try{
             if (e.target.password.value !== e.target.confirmPassword.value){
                 ErrorMessge({message:'password missmatch'})
@@ -234,6 +265,7 @@ export const AuthProvider = ({children}) =>{
         logoutUser: logoutUser,
         signupUser:signupUser,
         getUserProfile: getUserProfile,
+        handleAdminLogin:handleAdminLogin,
         
     }
 
