@@ -16,7 +16,7 @@ const ProfileVisitMatches = ({onClose, likedMatches}) => {
             <p className='font-semibold text-left'>visited profiles</p>
             <div className="max-w-screen-lg justify-between mx-auto">
                 {
-                    likedMatches.map((match)=>(
+                    likedMatches?.map((match)=>(
 
                 <div className="p-3 my-2 flex items-center bg-[#EFF6FE] justify-between cursor-pointer rounded-md hover:bg-[#c5ddf9] border border-solid border-gray-700">
                     <div className="flex items-center">

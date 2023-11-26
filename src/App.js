@@ -16,6 +16,9 @@ import AdminDashBoard from './components/admin/AdminDashBoard';
 import AdminUserList from './components/admin/users/AdminUserList';
 import AdminUserProfile from './components/admin/users/AdminUserProfile';
 import PremiumPage from './pages/adminPanel/PremiumPage';
+import ChatPage from './pages/chatApp/ChatPage';
+import AdminChatBox from './components/admin/AdminChatBox'
+import ChatBox from './pages/chatApp/ChatBox';
 
 function App() {
   
@@ -32,6 +35,7 @@ function App() {
             <Route Component={AdminUserList} path='adminuserlist' />
             <Route Component={AdminUserProfile} path='adminuserprofile' />
             <Route Component={PremiumPage} path='premiumpage' />
+            <Route Component={AdminChatBox} path='adminchatbox' />
           
           </Route>
           <Route Component={AdminLogin} path='/adminlogin' />
@@ -43,6 +47,9 @@ function App() {
             <Route Component={HomeField} path='homefield' />
             <Route Component={AllMatches} path='matches' />
             <Route Component={MatchProfile} path='matchprofile' />
+            <Route Component={ChatPage} path='chatpage' />
+            <Route Component={ChatPage} path='chatpage/:username' />
+            
           </Route>
         </Routes>
       </AuthProvider>

@@ -122,7 +122,7 @@ const MatchesField = ({getAllMatches, allMatch}) => {
 
                     <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4 ">
                         <div className="bg-[#ffffff] border-x  rounded-xl text-center shadow-md border border-solid border-gray-700">
-                            <img src={match?.profile_img ? `http://127.0.0.1:8000/${match.profile_img}`:'https://i.pravatar.cc/150?img=32'} alt="" className="w-full h-60 object-cover object-center bord cursor-pointer p-2 rounded-2xl" />
+                            <img src={match?.profile_img ? `http://127.0.0.1:8000${match.profile_img}`:'https://i.pravatar.cc/150?img=32'} alt="" className="w-full h-60 object-cover object-center bord cursor-pointer p-2 rounded-2xl" />
             
                             <h4 className="text-lg md:text-xl pt-2 font-bold">{match.first_name} {match.last_name}</h4>
                             <p className="text-sm font-semibold leading-6 md:leading-7 my-2 md:my-3 ">{match.age? `Age : ${match.age}` : ''}   </p>

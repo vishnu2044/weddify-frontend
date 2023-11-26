@@ -54,7 +54,7 @@ const HomeNavbar = () => {
                 className={`${activeNav === 'notification' ? 'bg-[#772750] rounded-lg shadow-md ' : 'hover:bg-opacity-30 '} p-2 px-3 py-2 pt-1 mt-3 text-white no-underline` }>
                 Notificaiton
             </Link>
-            <Link to="userprofile"                
+            <Link to="chatpage"                
                 onClick={()=> handleNavClick('chat')} 
                 className={`${activeNav === 'chat' ? 'bg-[#772750] rounded-lg shadow-md ' : 'hover:bg-opacity-30 '} p-2 px-3 py-2 pt-1 mt-3 text-white no-underline` }>
                 chat

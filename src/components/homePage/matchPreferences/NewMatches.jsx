@@ -57,7 +57,7 @@ const NewMatches = () => {
                     <div className="text-center m-4">
                         <img 
                             className=" h-60 w-100 rounded-md object-cover object-center border border-solid border-gray-700 cursor-pointer" 
-                            src={m?.profile_img ? `http://127.0.0.1:8000/${m.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
+                            src={m?.profile_img ? `http://127.0.0.1:8000${m.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
                             onClick={() => navigate("/home/matchprofile", { state: { matchId: m.id } })}
                             alt="Profile"
                         />

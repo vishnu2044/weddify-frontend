@@ -94,7 +94,7 @@ import { useNavigate } from 'react-router-dom'
                             <img
                                 onClick={() => navigate("/home/matchprofile", { state: { matchId: match.id } })}
                                 className="mb-2 rounded-md mx-auto h-32 w-32 cursor-pointer"
-                                src={match?.profile_img ? `http://127.0.0.1:8000/${match.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
+                                src={match?.profile_img ? `http://127.0.0.1:8000${match.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
                                 alt="User Avatar"
                             />
                             </div>
@@ -142,7 +142,7 @@ import { useNavigate } from 'react-router-dom'
                             <img
                             onClick={() => navigate("/home/matchprofile", { state: { matchId: match.id } })}
                             className="mb-2 rounded-md mx-auto h-32 w-32 cursor-pointer"
-                            src={match?.profile_img ? `http://127.0.0.1:8000/${match.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
+                            src={match?.profile_img ? `http://127.0.0.1:8000${match.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
                             alt="User Avatar"
                             />
                         </div>

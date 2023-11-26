@@ -19,7 +19,7 @@ const UserProfileDetails = ({userProfile, user, setCurrentComponent}) => {
                     <div class="col-span-1 sm:col-span-3">
                         <div class="bg-white shadow rounded-lg p-6">
                             <div class="flex flex-col items-center">
-                                <img src={userProfile?.profile_img ? `http://127.0.0.1:8000/${userProfile.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" } class="w-32 h-32 bg-gray-300 rounded-3xl mb-3" alt="" />
+                                <img src={userProfile?.profile_img ? `http://127.0.0.1:8000${userProfile.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" } class="w-32 h-32 bg-gray-300 rounded-3xl mb-3" alt="" />
                                 <p>{userProfile?.unique_user_id ? userProfile?.unique_user_id : "user unique id "}</p>
                                 <h1 class="text-xl font-bold">{user?.username}</h1>
                                 <br />
@@ -79,7 +79,7 @@ const UserProfileDetails = ({userProfile, user, setCurrentComponent}) => {
                             <div class="mt-2 flex flex-wrap gap-4 justify-center">
                                 <p onClick={() => setCurrentComponent('blockedProfiles')} class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white py-2 px-3 rounded">Blocked matches</p>
                                 <p onClick={() => setCurrentComponent('visitedProfiles')} class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white py-2 px-3 rounded-lg">Visited profiles</p>
-                                <p onClick={logoutUser} class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white py-2 px-4 rounded">likes</p>
+                                <p class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white py-2 px-4 rounded">likes</p>
                                 <p onClick={logoutUser} class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white py-2 px-4 rounded">Logout</p>
                             </div>
                         </div>

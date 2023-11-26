@@ -28,7 +28,7 @@ function Home() {
           navigate('/adminpanel/admindashboard')
 
         }else if (data.check === 'is_normal_user'){
-          alert("error::::", data.check)
+          console.log('user is normal user')
         }else{
           console.log('user is not authenticated');
         }
