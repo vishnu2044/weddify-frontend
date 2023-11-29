@@ -57,9 +57,9 @@ const AdminNavBar = () => {
         </div>
         <p 
             onClick={logoutUser} 
-            className={`toggle hidden md:flex w-full md:w-auto px-4 py-2 shadow-sm   text-right bg-[#5f1d3f] hover:bg-blue-500 text-white md:rounded`}
+            className={`toggle hidden md:flex w-full md:w-auto px-4 py-2 shadow-sm cursor-pointer text-right bg-[#5f1d3f] hover:bg-[#963d6b] text-white md:rounded`}
         >
-            admin account
+            Logout
         </p>
     </nav>
   )

@@ -151,29 +151,38 @@ const ChatBox = () => {
     }
   };
 
+  const chatContainerRef = useRef();
+  useEffect(() => {
+    if (messages.length > 0) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages, senderDetails?.username]);
+  
+  
+
   return (
-<div className="">
+<div >
   {console.log("chat details >>>>>>>>>>>>", messages)}
   {messages.length > 0 ? (
     <>
-      <div className='w-full h-auto px-3 py-3 bg-[#edf4ff] shadow-md rounded-xl my-1 flex justify-between'>
-        <div className='flex'>
-          <img
-            className="rounded-full h-10 w-10"
-            src={senderDetails?.profile_img ? `http://127.0.0.1:8000${senderDetails.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
-            alt="User"
-          />
-          <div className="my-2 flex flex-col">
-            <div className="leading-snug text-sm text-gray-900 font-bold mx-3">{senderDetails?.username}</div>
+        <div className='w-full h-auto px-3 py-3 bg-[#edf4ff] shadow-md rounded-xl my-1 flex justify-between'>
+          <div className='flex'>
+            <img
+              className="rounded-full h-10 w-10"
+              src={senderDetails?.profile_img ? `http://127.0.0.1:8000${senderDetails?.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
+              alt="User"
+            />
+            <div className="my-2 flex flex-col">
+              <div className="leading-snug text-sm text-gray-900 font-bold mx-3">{senderDetails?.username}</div>
+            </div>
+          </div>
+          <div className='flex mt-2'>
+            <FaUser className='m-1 text-lg mx-3' />
+            <IoVideocam className='m-1 text-lg mx-3' />
           </div>
         </div>
-        <div className='flex mt-2'>
-          <FaUser className='m-1 text-lg mx-3' />
-          <IoVideocam className='m-1 text-lg mx-3' />
-        </div>
-      </div>
-      <div className="h-96 overflow-y-auto bg-white rounded-lg">
-        <div className="flex flex-col gap-4 py-4 px-2">
+      <div  className="h-96 overflow-y-auto bg-white rounded-lg" ref={chatContainerRef} >
+        <div className="flex flex-col gap-4 py-4 px-2"  >
           {messages.map((message, idx) => {
             if (message.sender === user.user_id) {
               return (
@@ -184,10 +193,10 @@ const ChatBox = () => {
                     alt="User"
                   />
                   <div className="flex justify-start">
-                    <div className="bg-gray-100 rounded-lg px-4 py-1 shadow-md max-w-[80%]">
-                      <p className="text-gray-900 text-sm mb-0 py-1">{message.message}</p>
-                      <p className="text-gray-400 text-xs my-0 text-left">{message.send_at}</p>
-                    </div>
+                      <div className="bg-gray-100 rounded-lg px-4 py-1 shadow-md max-w-[80%]">
+                          <p className="text-gray-900 text-sm mb-0 py-1">{message.message}</p>
+                          <p className="text-gray-400 text-xs my-0 text-left">{message.send_at}</p>
+                      </div>
                   </div>
                 </div>
               );

@@ -19,6 +19,8 @@ import PremiumPage from './pages/adminPanel/PremiumPage';
 import ChatPage from './pages/chatApp/ChatPage';
 import AdminChatBox from './components/admin/AdminChatBox'
 import ChatBox from './pages/chatApp/ChatBox';
+import PremiumPlans from './pages/premium/PremiumPlans';
+import PaymentPage from './components/premiumUserSide/PaymentPage';
 
 function App() {
   
@@ -47,8 +49,10 @@ function App() {
             <Route Component={HomeField} path='homefield' />
             <Route Component={AllMatches} path='matches' />
             <Route Component={MatchProfile} path='matchprofile' />
+            <Route Component={PremiumPlans} path='premiumplans' />
             <Route Component={ChatPage} path='chatpage' />
             <Route Component={ChatPage} path='chatpage/:username' />
+            <Route Component={PaymentPage} path='payment-page' />
             
           </Route>
         </Routes>

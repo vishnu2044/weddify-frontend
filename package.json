@@ -19,6 +19,7 @@
     "react-scripts": "5.0.1",
     "react-use-websocket": "^4.5.0",
     "reactstrap": "^9.2.0",
+    "stripe": "^14.5.0",
     "sweetalert2": "^11.7.32",
     "web-vitals": "^2.1.4",
     "websocket": "^1.0.34"

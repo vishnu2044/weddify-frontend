@@ -43,7 +43,7 @@ const ChatPage = () => {
       <div class="grid grid-cols-12 gap-6 px-4 h-auto">
         <div class="col-span-1 sm:col-span-3 bg-white shadow rounded-lg  ">
           <div class=" p-6">
-            <ChatList users={users} />
+            <ChatList users={users} getUser={getUser} />
           </div>
         </div>
 

@@ -39,10 +39,10 @@ const HomeNavbar = () => {
             className={`${activeNav === 'homefield' ? 'bg-[#772750] rounded-lg shadow-md ' : 'hover:bg-opacity-30 '} p-2 px-3 py-2 pt-1 mt-3 text-white no-underline`}>
                 Home
             </Link>
-            <Link to="userprofile" 
+            <Link to="premiumplans" 
                 onClick={()=> handleNavClick('userprofile')} 
                 className={`${activeNav === 'userprofile' ? 'bg-[#772750] rounded-lg shadow-md ' : 'hover:bg-opacity-30 '} p-2 px-3 py-2 pt-1 mt-3 text-white no-underline` }>
-                    UserProfile
+                    premium
             </Link>
             <Link to="/home/matches" 
                 onClick={()=> handleNavClick('/home/matches')} 

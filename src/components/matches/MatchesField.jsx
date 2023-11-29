@@ -130,15 +130,17 @@ const MatchesField = ({getAllMatches, allMatch}) => {
                             
 
                             <div className="flex flex-wrap justify-center bord cursor-pointer">
-                                {/* <Link to='matchprofile'> */}
+                                
                                     <p onClick={()=> navigate("/home/matchprofile", {state : {matchId : match.id }} )} className="bg-[#6471b1] text-white shadow-md py-2 px-4 md:py-2.5 md:px-8 mx-2 rounded-lg ">View</p>
-                                {/* </Link> */}
+                                
                                 {match.like === true ? 
                                     <p onClick={()=>unlikeUser({match_id : match.id})} className="bg-[#ff2525] text-white shadow-md py-2 px-2 md:py-2.5 md:px-8 mx-2 rounded-lg justify-center"> <AiOutlineHeart className='text-2xl'/> </p>
                                                             : 
                                     <p onClick={()=>likeUser({match_id : match.id})} className="bg-[#6471b1] text-white shadow-md py-2 px-2 md:py-2.5 md:px-8 mx-2 rounded-lg justify-center"> <AiOutlineHeart className='text-2xl'/> </p>
                                 }
-                                <p className="bg-[#64b17f] text-white shadow-md py-2 px-4 md:py-2.5 md:px-8 mx-2 rounded-lg justify-center"> Chat </p>
+                                <Link to={`/home/chatpage/${match.id}`}>
+                                    <p className="bg-[#64b17f] text-white shadow-md py-2 px-4 md:py-2.5 md:px-8 mx-2 rounded-lg justify-center"> Chat </p>
+                                </Link>
                             </div>
                             <p className="text-sm leading-6 md:leading-7 my-2 mx-2 md:my-3 font-medium text-left ">Don't like {match.gender === 'male' ? 'Him' : 'Her'} ?</p>
                             <p onClick={()=>blockUser({match_id : match.id})} className="bg-[#c4c3c3] bord cursor-pointer py-2 px-6 md:py-2.5 md:px-8 mx-2 rounded-lg shadow-md ">Block</p>
