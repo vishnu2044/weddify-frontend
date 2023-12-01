@@ -5,11 +5,12 @@ const AllUsers = ({adminPanelData, userBlockManagement}) => {
     const navigate = useNavigate()
   return (
     <div>
-        <div class="mx-6 bg-[#A6C9E8] rounded-md">
-            <div class="m-6 pt-2">
+        <div class="mx-6  rounded-md shadow-md border border-solid border-gray-200 mb-3">
+            <div class="mx-4 pt-2">
                 <div class="flex flex-wrap -mx-6">
                     <div class="w-full px-6 ">
-                        <div class="flex items-center px-3 py-6 shadow-md rounded-md bg-[#d1e0ed]">
+                        <div class="flex items-center px-5 py-3 shadow-md rounded-md ">
+                            <p className='font-semibold m-0 text-xl'>All users</p>
                         </div>
                     </div>
                 </div>
@@ -17,7 +18,7 @@ const AllUsers = ({adminPanelData, userBlockManagement}) => {
             <div class="flex flex-wrap">
                 <div class="w-full px-6">
                     <div class="flex items-center px-3 py-3 ">
-                        <table class="min-w-full divide-y bg-[#d2e1ef] divide-gray-200 rounded-md">
+                        <table class="min-w-full divide-y  divide-gray-200 rounded-md">
                             <thead>
                                 <tr>
                                     <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"></th>

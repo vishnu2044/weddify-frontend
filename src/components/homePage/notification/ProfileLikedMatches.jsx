@@ -1,9 +1,14 @@
 import React from 'react'
 
-const ProfileLikedMatches = () => {
+const ProfileLikedMatches = (
+    {
+        likedMatches,
+        onClose
+    }
+) => {
   return (
 <div class="flex place-items-start justify-center ">
-    <div class="border rounded-lg shadow relative w-xl">
+    <div class="border rounded-lg shadow relative w-xl bg-[#FFB8B8]">
         <div class="flex justify-end p-2">
             <button onClick={onClose} type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -13,14 +18,14 @@ const ProfileLikedMatches = () => {
         </div>
 
         <div class="p-6 text-center">
-            <p className='font-semibold text-left'>visited profiles</p>
+            <p className='font-semibold text-left'>Liked  profiles</p>
             <div className="max-w-screen-lg justify-between mx-auto">
                 {
-                    profileVisitedMatches.map((match)=>(
+                    likedMatches.map((match)=>(
 
                 <div className="p-3 my-2 flex items-center bg-[#EFF6FE] justify-between cursor-pointer rounded-md hover:bg-[#c5ddf9] border border-solid border-gray-700">
                     <div className="flex items-center">
-                        <img className="rounded-full h-14 w-14" src={match?.profile_img ? `http://127.0.0.1:8000/${match.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" }    />
+                        <img className="rounded-full h-14 w-14" src={match?.profile_img ? `http://127.0.0.1:8000${match.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" }    />
                         <div className="ml-2 flex flex-col">
                             <div className="leading-snug text-sm text-gray-900 font-bold">{match.first_name} {match.last_name}</div>
                             <div className="leading-snug text-xs text-gray-600">{match.visited_time}</div>

@@ -26,7 +26,6 @@ function Home() {
         const data = await response.json();
         if (data.check === 'is_admin'){
           navigate('/adminpanel/admindashboard')
-
         }else if (data.check === 'is_normal_user'){
           console.log('user is normal user')
         }else{

@@ -30,6 +30,7 @@ const HomeField = () => {
         const data = await response.json();
         setProfileVisitedMatches(data.data);
         setMatchCount(data.match_count);
+        console.log("visited profiles::::::::::::::::",data.data)
       } else if (response.status === 400) {
         ErrorMessge({ message: 'Professional not added' });
       } else if (response.status === 401) {
@@ -73,8 +74,6 @@ const HomeField = () => {
   };
   
   
-  
-
   const checkProfileCompleteHome = async () =>{
     try{
       let response = await fetch('http://127.0.0.1:8000/preferedmatches/check_profile_completed/', {

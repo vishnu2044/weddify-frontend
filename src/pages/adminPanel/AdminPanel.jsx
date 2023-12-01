@@ -15,6 +15,8 @@ const AdminPanel = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  
   const checkUserIsAdmin = async () => {
     try {
       const response = await fetch('http://127.0.0.1:8000/adminpanel/check_user_is_admin/', {

@@ -37,7 +37,7 @@ const ProfilesVisitedYous = ({setCurrentComponent}) => {
 
     useEffect(()=>{
         getProfilesVisitedYours()
-    })
+    }, [])
   return (
     <div class="bg-gray-100">
     <div class="container mx-auto py-8">

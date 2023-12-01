@@ -18,9 +18,9 @@ import AdminUserProfile from './components/admin/users/AdminUserProfile';
 import PremiumPage from './pages/adminPanel/PremiumPage';
 import ChatPage from './pages/chatApp/ChatPage';
 import AdminChatBox from './components/admin/AdminChatBox'
-import ChatBox from './pages/chatApp/ChatBox';
 import PremiumPlans from './pages/premium/PremiumPlans';
 import PaymentPage from './components/premiumUserSide/PaymentPage';
+import PaymentConfirmationPage from './components/premiumUserSide/paymentResult/PaymentConfirmationPage';
 
 function App() {
   
@@ -37,7 +37,11 @@ function App() {
             <Route Component={AdminUserList} path='adminuserlist' />
             <Route Component={AdminUserProfile} path='adminuserprofile' />
             <Route Component={PremiumPage} path='premiumpage' />
-            <Route Component={AdminChatBox} path='adminchatbox' />
+            <Route Component={AdminChatBox} path='adminchatbox' >
+              <Route Component={ChatPage} path='chatpage' />
+              <Route Component={ChatPage} path='chatpage/:username' />
+            </Route>
+
           
           </Route>
           <Route Component={AdminLogin} path='/adminlogin' />
@@ -53,6 +57,7 @@ function App() {
             <Route Component={ChatPage} path='chatpage' />
             <Route Component={ChatPage} path='chatpage/:username' />
             <Route Component={PaymentPage} path='payment-page' />
+            <Route Component={PaymentConfirmationPage} path='payment-confirmation-page' />
             
           </Route>
         </Routes>

@@ -3,6 +3,7 @@ import { ErrorMessge } from "../alerts/UserAuthentication";
 import { validateEmail, isInputEmptyOrSpaces, containsOnlyAlphabets } from "./FormValidation";
 
 
+
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
@@ -53,7 +54,6 @@ export const AuthProvider = ({children}) =>{
     };
 
     let loginUser = async (event) =>{
-
         event.preventDefault();
 
         console.log({message:'form submited'});
@@ -62,51 +62,57 @@ export const AuthProvider = ({children}) =>{
         }
         if (isInputEmptyOrSpaces(event.target.password)){
             ErrorMessge({message:"please enter password"})
-        }
-        
-        let response = await fetch('http://127.0.0.1:8000/userauth/token/',{
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({'username':event.target.username.value, 'password':event.target.password.value})
-            
-        })
-        let data = await response.json()
-
-        if (response.status === 200){
-            setAuthTokens(data)
-            setUser(jwt_decode(data.access))
-            localStorage.setItem('authTokens', JSON.stringify(data))
-            navigate('home/homefield', { replace: true })
-
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-              })
-              
-              Toast.fire({
-                icon: 'success',
-                title: 'Signed in successfully'
-              })
-              if(user === null){
-                console.log("dfsa")
-              }
-            
         }else{
-            console.log("OOPS!! Something went wrong!!")
-        }
 
-        console.log("data : ", data)
-        console.log("response : ", response)
-        
+            let response = await fetch('http://127.0.0.1:8000/userauth/token/',{
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'username':event.target.username.value, 'password':event.target.password.value})
+                
+            })
+            let data = await response.json()
+    
+            if (response.status === 200){
+                setAuthTokens(data)
+                setUser(jwt_decode(data.access))
+                localStorage.setItem('authTokens', JSON.stringify(data))
+                navigate('home/homefield', { replace: true })
+    
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                  
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                  })
+                  if(user === null){
+                    console.log("dfsa")
+                  }
+                
+            }else if (response.status === 400) {
+                ErrorMessge({message:"this user is blocked by admin please contact admin"})
+            }else if (response.status === 404) {
+                ErrorMessge({message:"username incorrect "})
+            }else if (response.status === 403) {
+                ErrorMessge({message:"password incorrect "})
+            }else{
+                console.log("OOPS!! Something went wrong!!")
+            }
+    
+            console.log("data : ", data)
+            console.log("response : ", response)    
+        }
         
     }
 
@@ -179,7 +185,7 @@ export const AuthProvider = ({children}) =>{
                         'username':e.target.username.value,
                         'password': e.target.password.value,
                         'first_name': e.target.firstName.value,
-                        'last_name': e.target.lastName.value,
+                        'last_name': e.target.lastName.value,   
                         'email': e.target.email.value,
                     })
                     
@@ -188,10 +194,14 @@ export const AuthProvider = ({children}) =>{
                 console.log("signin response :::", response)
                 let data = await response.json()
                 console.log(data)
-
-                if (data){
-                    navigate('/')
-    
+                if(response.status === 400){
+                    ErrorMessge({message: "username already excists"})
+                    
+                }else if(response.status === 403){
+                    ErrorMessge({message: "email already excists"})
+                        
+                }else if (data){
+                    window.location.reload()
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -209,19 +219,6 @@ export const AuthProvider = ({children}) =>{
                         title: 'Your account created successfully'
                       })
     
-                }else if(data.username){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'username is already taken'
-                    })
-                    
-                }else if(data.email){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Email is already taken'
-                    })
                 }else{
                     alert('somethingwrong')
                 }

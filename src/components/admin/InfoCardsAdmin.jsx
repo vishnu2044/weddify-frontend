@@ -135,8 +135,8 @@ const InfoCardsAdmin = ({adminPanelData}) => {
                         </div>
 
                         <div class="mx-3">
-                            <div class="text-gray-500 text-sm">Premuim users users</div>
-                            <h4 class="text-2xl font-semibold text-gray-700">{adminPanelData.total_users}</h4>
+                            <div class="text-gray-500 text-sm">Premuim users</div>
+                            <h4 class="text-2xl font-semibold text-gray-700">{adminPanelData.premium_users}</h4>
                         </div>
 
                     </div>
@@ -169,7 +169,7 @@ const InfoCardsAdmin = ({adminPanelData}) => {
 
                         <div class="mx-3">
                             <div class="text-gray-500 text-sm">Normal users</div>
-                            <h4 class="text-2xl font-semibold text-gray-700">{adminPanelData.total_users}</h4>
+                            <h4 class="text-2xl font-semibold text-gray-700">{adminPanelData.non_premium_users}</h4>
                         </div>
 
                     </div>

@@ -6,6 +6,8 @@ import { useLocation } from 'react-router-dom';
 import AuthContext from '../../../context/AuthContext';
 import { ErrorMessge } from '../../../alerts/UserAuthentication';
 import Swal from 'sweetalert2';
+import { baseUrl } from '../../../Configure/urls';
+import { Link } from 'react-router-dom';
 
 const AdminUserProfile = () => {
     const location = useLocation()
@@ -19,7 +21,7 @@ const AdminUserProfile = () => {
 
     let getUserProfile = async () =>{
         try{
-            let response = await fetch(`http://127.0.0.1:8000/preferedmatches/getmatchprofile/${matchId}`,{
+            let response = await fetch(`${baseUrl}/preferedmatches/getmatchprofile/${matchId}`,{
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,11 +101,11 @@ const AdminUserProfile = () => {
   return (
     <div className='mt-28 px-4'>
         <div class="mx-auto py-8">
-            <div class={`grid grid-cols-4 sm:grid-cols-12 gap-6 px-4  shadow rounded-lg mx-5 border border-solid border-gray-700 ${matchProfile?.gender === 'male' ? 'bg-[#E7F9E7]' : 'bg-[#FFF0F0]'}` }>
+            <div class={`grid grid-cols-4 sm:grid-cols-12 gap-6 px-4  shadow rounded-lg mx-5 border border-solid border-gray-700 ` }>
                 <div class="col-span-4 sm:col-span-3">
                     <div class="p-6">
                         <div class="flex flex-col items-center">
-                            <img src={matchProfile?.profile_img ? `http://127.0.0.1:8000/${matchProfile.profile_img}`:'https://i.pravatar.cc/150?img=32'} class="w-auto h-auto bg-gray-300 rounded-md shrink-0" />
+                            <img src={matchProfile?.profile_img ? `http://127.0.0.1:8000${matchProfile.profile_img}`:'https://i.pravatar.cc/150?img=32'} class="w-auto h-auto bg-gray-300 rounded-md shrink-0" />
                         </div>
                     </div>
                 </div>
@@ -129,7 +131,9 @@ const AdminUserProfile = () => {
                         </div>
 
                         <div class="mt-6 flex flex-wrap gap-4">
-                            <p className="bg-[#64b17f] text-white shadow-md py-2 px-4 md:py-2.5 md:px-8  rounded-lg justify-center"> Chat </p>
+                            <Link to={`/home/chatpage/${UserProfile?.id}`} className='no-underline'>
+                                <p className="bg-[#64b17f] text-white shadow-md py-2 px-4 md:py-2.5 md:px-8  rounded-lg justify-center"> Chat </p>
+                            </Link>
                             <p onClick={()=> userBlockManagement(UserProfile?.id)} className="bg-[#969696] text-white shadow-md py-2 px-4 md:py-2.5 md:px-8  rounded-lg justify-center"> {UserProfile?.is_active ? 'block' : "Unblock"} </p>
                         </div>
 
@@ -142,7 +146,7 @@ const AdminUserProfile = () => {
             <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 px-4 ">
                 <div class="col-span-1 sm:col-span-6 gap-6 px-4">
 
-                  <div class= {` shadow-xl rounded-2xl px-3 py-4 border border-solid border-gray-700 ${matchProfile?.gender === 'male' ? 'bg-[#E7F9E7]' : 'bg-[#FFF0F0]'}`}>
+                  <div class= {` shadow-xl rounded-2xl px-3 py-4 border border-solid border-gray-700 `}>
                     <div className="flex justify-between items-center px-3 ">
                         <h3 className="text-xl  font-semibold text-dark">{matchProfile?.gender === 'male' ? 'His' : 'Her'} Basic Details</h3>
                         
@@ -181,12 +185,12 @@ const AdminUserProfile = () => {
                 </div>
 
                 <div class="col-span-1 sm:col-span-6 gap-6 px-4">
-                    <div class={` shadow-xl rounded-2xl p-6 border border-solid border-gray-700 ${matchProfile?.gender === 'male' ? 'bg-[#E7F9E7]' : 'bg-[#FFF0F0]'}`}>
+                    <div class={` shadow-xl rounded-2xl p-6 border border-solid border-gray-700 `}>
 
                       <div className="flex justify-between items-center px-3 mb-3 ">
                           <h3 className="text-xl  font-semibold text-[#a43f75]"> {matchProfile?.gender === 'male' ? 'His' : 'Her'} Professional Details</h3>
                       </div>
-                      <div class=" grid grid-cols-2 gap-2 text-gray-600 ">
+                      <div class=" grid grid-cols-2 gap-2 text-gray-600">
                                     <div class="text-right pr-3">
                                         <p><strong>Education :</strong></p>
                                         <p><strong>College :</strong></p>
@@ -209,7 +213,7 @@ const AdminUserProfile = () => {
                                 </div>
                     </div>
 
-                    <div class={` shadow-xl rounded-2xl mt-2 p-6 border border-solid border-gray-700 ${matchProfile?.gender === 'male' ? 'bg-[#E7F9E7]' : 'bg-[#FFF0F0]'}`}>
+                    <div class={` shadow-xl rounded-2xl mt-2 p-6 border border-solid border-gray-700 `}>
 
                       <div className="flex justify-between items-center px-3 mb-2">
                           <h3 className="text-xl  font-semibold text-[#a43f75]">{matchProfile?.gender === 'male' ? 'His' : 'Her'} Religional Details</h3>

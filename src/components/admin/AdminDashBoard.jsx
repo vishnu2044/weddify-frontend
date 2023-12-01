@@ -3,6 +3,8 @@ import InfoCardsAdmin from './InfoCardsAdmin'
 import { useNavigate } from 'react-router-dom';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import AuthContext from '../../context/AuthContext';
+import UsersChat from './charts/UsersChat';
+import PremiumChart from './charts/PremiumChart';
 
 const AdminDashBoard = () => {
   let [menuOpen, setMenuOpen] = useState(false);
@@ -10,7 +12,7 @@ const AdminDashBoard = () => {
   let {authTokens, logoutUser } = useContext(AuthContext)
   let [adminPanelData, setAdminPanelData] = useState('')
 
-  let getAdminPanelData = async() =>{
+  const getAdminPanelData = async() =>{
     try{
       let response = await fetch("http://127.0.0.1:8000/adminpanel/get_admin_panel_data/",{
           method: "GET",
@@ -41,140 +43,140 @@ const AdminDashBoard = () => {
 
   useEffect(()=>{
     getAdminPanelData()
-  }, [])
+  },[])
 
   return (
     <div className='mt-28 px-4'>
       <InfoCardsAdmin adminPanelData={adminPanelData}/>
 
-      
-      <div class="m-6">
-            <div class="flex flex-wrap -mx-6">
-                
-                <div class="w-full px-6 ">
-                    <div class="flex items-center px-3 py-6 shadow-md rounded-md bg-[#a6c9e8]">
-                      
-                    </div>
+      <div class="mx-4 my-2">
+        <div class="shadow-md rounded-md bg-[#c5e0f7]">
+          <div class="flex flex-wrap -mx-6">
+            <div class="w-full">
+                <div class="flex items-center px-5 py-2 ">
+                  <p className='font-semibold m-0 text-xl'>Graph analytics</p>
                 </div>
-
-
+              </div>
             </div>
+          </div>
         </div>
-      <div class="m-6">
-            <div class="flex flex-wrap -mx-6">
-                
-                <div class="w-full px-6 sm:w-1/2 xl:w-1/2">
-                    <div class="flex items-center px-3 py-3 shadow-md rounded-md bg-[#C9F0C9]">
-                  
-                    <table class="min-w-full divide-y bg-[#e7f9e7] divide-gray-200 rounded-md">
-                      <thead>
-                          <tr>
-                              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"></th>
-                              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
-                              <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">user id  </th>
-                              <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                              <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody class=" divide-y divide-gray-200">
-                        {
-                          adminPanelData?.men?.slice(0,4).map((user)=>(
-                          <tr>
-                              <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="relative">
-                                  <img class="h-12 w-12 rounded-full object-cover" src={user?.profile_img ? `http://127.0.0.1:8000${user.profile_img}`:'https://i.pravatar.cc/150?img=32'} alt="Avatar" />
-                                  <div class="absolute inset-0 rounded-full shadow-inner"></div>
-                                </div>
-                              </td>
-                              <td class="px-6 py-4 whitespace-nowrap">{user?.first_name} {user?.last_name}</td>
-                              <td class="px-6 py-4 whitespace-nowrap">{user.id}</td>
-                              <td class="px-6 py-4 whitespace-nowrap">
-                                {
-                                  user?.is_active === true ?
-                                    <span class="px-3 inline-flex leading-5 text-sm  rounded-full bg-green-700 text-white">Active</span>
-                                  :
-                                    <span class="px-3 inline-flex leading-5 text-sm  rounded-full bg-red-700 text-white">not-Active</span>
-                                }
-                              </td>
-                              <td class="px-6 py-4 whitespace-nowrap">
-                                  <button
-                                    onClick={()=>navigate('/adminpanel/adminuserprofile', {state : {userId : user.id }})}
-                                    className="py-1.5 px-3 text-center bg-[#6471b1] rounded-lg text-white dark:bg-[#6471b1]"
-                                    type="submit"
+      <div className='flex flex-col md:flex-row'>
+        <UsersChat adminPanelData={adminPanelData}/>
+        <PremiumChart adminPanelData={adminPanelData}/>
+      </div>
+
+      
+      <div class="mx-4 my-2">
+        <div class="shadow-md rounded-md bg-[#c5e0f7]">
+          <div class="flex flex-wrap -mx-6">
+            <div class="w-full">
+                <div class="flex items-center px-5 py-2 ">
+                  <p className='font-semibold m-0 text-xl'>All users</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='mx-4 mb-4'>
+    <div className='flex flex-wrap -mx-2'>
+
+        {/* Men Table */}
+        <div className='w-full sm:w-1/2 xl:w-1/2 px-2 mb-4'>
+            <div className='flex items-center px-3 py-3 border border-solid border-gray-300 shadow-md rounded-md'>
+                <table className='min-w-full divide-y divide-gray-200 rounded-md'>
+                    <thead>
+                        <tr>
+                            <th className='px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider'></th>
+                            <th className='px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider'>Name</th>
+                            <th className='px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>User ID</th>
+                            <th className='px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Status</th>
+                            <th className='px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody className='divide-y divide-gray-200'>
+                        {adminPanelData?.men?.slice(0, 4).map((user) => (
+                            <tr key={user.id}>
+                                <td className='px-6 py-4 whitespace-nowrap'>
+                                    <div className='relative'>
+                                        <img className='h-12 w-12 rounded-full object-cover' src={user?.profile_img ? `http://127.0.0.1:8000${user.profile_img}` : 'https://i.pravatar.cc/150?img=32'} alt='Avatar' />
+                                    </div>
+                                </td>
+                                <td className='px-6 py-4 whitespace-nowrap'>{`${user?.first_name} ${user?.last_name}`}</td>
+                                <td className='px-6 py-4 whitespace-nowrap'>{user.id}</td>
+                                <td className='px-6 py-4 whitespace-nowrap'>
+                                    {user?.is_active === true ? (
+                                        <span className='px-3 inline-flex leading-5 text-sm rounded-full bg-green-700 text-white'>Active</span>
+                                    ) : (
+                                        <span className='px-3 inline-flex leading-5 text-sm rounded-full bg-red-700 text-white'>Not Active</span>
+                                    )}
+                                </td>
+                                <td className='px-6 py-4 whitespace-nowrap'>
+                                    <button
+                                        onClick={() => navigate('/adminpanel/adminuserprofile', { state: { userId: user.id } })}
+                                        className='py-1.5 px-3 text-center bg-[#6471b1] rounded-lg text-white dark:bg-[#6471b1]'
+                                        type='submit'
                                     >
                                         View
-                                </button>
-                              </td>
-                          </tr>
-
-                          ))
-                        }
-
-                      </tbody>
-                  </table>
-
-
-                    </div>
-                </div>
-
-                <div class="w-full px-6 sm:w-1/2 xl:w-1/2">
-                    <div class="flex items-center px-3 py-3 shadow-md rounded-md bg-[#F0C9C9]">
-
-                    <table class="min-w-full divide-y bg-[#fff0f0] divide-gray-200 rounded-md">
-                      <thead>
-                          <tr>
-                              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"></th>
-                              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
-                              <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">user id</th>
-                              <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                              <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody class=" divide-y divide-gray-200">
-                        {
-                          adminPanelData?.women?.slice(0,4).map((user)=>(
-                          <tr>
-                              <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="relative">
-                                  <img class="h-12 w-12 rounded-full object-cover" src={user?.profile_img ? `http://127.0.0.1:8000${user.profile_img}`:'https://i.pravatar.cc/150?img=32'} alt="Avatar" />
-                                  <div class="absolute inset-0 rounded-full shadow-inner"></div>
-                                </div>
-                              </td>
-                              <td class="px-6 py-4 whitespace-nowrap">{user?.first_name} {user?.last_name}</td>
-                              <td class="px-6 py-4 whitespace-nowrap">{user.id}</td>
-                              <td class="px-6 py-4 whitespace-nowrap">
-                                {
-                                  user?.is_active === true ?
-                                    <span class="px-3 inline-flex leading-5 text-sm  rounded-full bg-green-700 text-white">Active</span>
-                                  :
-                                    <span class="px-3 inline-flex leading-5 text-sm  rounded-full bg-red-700 text-white">not-Active</span>
-                                }
-                              </td>
-                              <td class="px-6 py-4 whitespace-nowrap">
-                                <button
-                                  onClick={()=>navigate('/adminpanel/adminuserprofile', {state : {userId : user.id }})}
-                                  className="py-1.5 px-3 text-center bg-[#6471b1] rounded-lg text-white dark:bg-[#6471b1]"
-                                  type="submit"
-                                    >
-                                      View
-                                </button>                              
-                              </td>
-                          </tr>
-
-                          ))
-                        }
-
-                      </tbody>
-                  </table>
-
-
-                    </div>
-                </div>
-
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
 
+        {/* Women Table */}
+        <div className='w-full sm:w-1/2 xl:w-1/2 px-2 mb-4'>
+            <div className='flex items-center px-3 py-3 border border-solid border-gray-300 shadow-md rounded-md'>
+                <table className='min-w-full divide-y divide-gray-200 rounded-md'>
+                    <thead>
+                        <tr>
+                            <th className='px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider'></th>
+                            <th className='px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider'>Name</th>
+                            <th className='px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>User ID</th>
+                            <th className='px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Status</th>
+                            <th className='px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody className='divide-y divide-gray-200'>
+                        {adminPanelData?.women?.slice(0, 4).map((user) => (
+                            <tr key={user.id}>
+                                <td className='px-6 py-4 whitespace-nowrap'>
+                                    <div className='relative'>
+                                        <img className='h-12 w-12 rounded-full object-cover' src={user?.profile_img ? `http://127.0.0.1:8000${user.profile_img}` : 'https://i.pravatar.cc/150?img=32'} alt='Avatar' />
+                                    </div>
+                                </td>
+                                <td className='px-6 py-4 whitespace-nowrap'>{`${user?.first_name} ${user?.last_name}`}</td>
+                                <td className='px-6 py-4 whitespace-nowrap'>{user.id}</td>
+                                <td className='px-6 py-4 whitespace-nowrap'>
+                                    {user?.is_active === true ? (
+                                        <span className='px-3 inline-flex leading-5 text-sm rounded-full bg-green-700 text-white'>Active</span>
+                                    ) : (
+                                        <span className='px-3 inline-flex leading-5 text-sm rounded-full bg-red-700 text-white'>Not Active</span>
+                                    )}
+                                </td>
+                                <td className='px-6 py-4 whitespace-nowrap'>
+                                    <button
+                                        onClick={() => navigate('/adminpanel/adminuserprofile', { state: { userId: user.id } })}
+                                        className='py-1.5 px-3 text-center bg-[#6471b1] rounded-lg text-white dark:bg-[#6471b1]'
+                                        type='submit'
+                                    >
+                                        View
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
+    </div>
+</div>
+
+
+        
     </div>
   )
 }

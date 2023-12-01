@@ -12,19 +12,6 @@ const PaymentPage = () => {
             ErrorMessge({message: "not working"})
         })
         
-        // const response = await fetch(`${baseUrl}/create-checkout-session/strip-checkout`, {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        // })
-        // if (response.status === 200){
-        //     console.log(response);
-        //     // window.location.href = response.data
-        // }else{
-        //     console.log(response);
-        //     ErrorMessge({message: "not working"})
-        // }
     }
 
     useEffect(() => {
@@ -33,6 +20,7 @@ const PaymentPage = () => {
     
         if (query.get("success")) {
           console.log("Order placed! You will receive an email confirmation.");
+
         }
     
         if (query.get("canceled")) {

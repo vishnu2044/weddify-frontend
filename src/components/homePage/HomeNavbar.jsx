@@ -66,7 +66,7 @@ const HomeNavbar = () => {
         </ul>
         
         {
-                openDropDown && <NavbarDropDown />
+                openDropDown && <NavbarDropDown setOpenDropDown={setOpenDropDown} />
             }
         <p className='bg-[#46132d] rounded-md cursor-pointer mt-2 py-1 px-3 mx-3' onClick={()=> setOpenDropDown ((prev) => !prev)}>{user.username}</p>
         <div onClick={handleNav} className='block md:hidden'>
