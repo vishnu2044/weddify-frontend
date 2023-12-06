@@ -3,7 +3,7 @@ import React from 'react'
 const ProfileVisitMatches = ({onClose, profileVisitedMatches}) => {
   return (
 <div class="flex place-items-start justify-center ">
-    <div class="border rounded-lg shadow relative w-xl bg-[#B3E8C6]">
+    <div class="border rounded-lg shadow relative w-xl bg-[#d2ffe3]">
         <div class="flex justify-end p-2">
             <button onClick={onClose} type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

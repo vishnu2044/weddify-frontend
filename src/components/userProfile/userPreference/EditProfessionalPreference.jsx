@@ -89,7 +89,7 @@ const EditProfessionalPreference = ({
     <>
         <div class="rounded-lg border bg-white m-3 shadow-sm border-y-zinc-950 p-4 md:p-8 flex items-center justify-center">
         <form class="w-full max-w-lg" onSubmit={updateProfessionalPreferences} >
-            <h3 class="text-lg font-semibold text-[#a43f75] text-center">Update Professional Preferences</h3>
+            <h3 class="text-lg font-semibold  text-center">Update Professional Preferences</h3>
 
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full px-3 mb-6 md:mb-0">
@@ -159,8 +159,8 @@ const EditProfessionalPreference = ({
             </div>
 
             <div class="flex justify-between">
-                <button class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-1 px-4 rounded" type="submit">Update</button>
-                <p onClick={() => setComponent('userPreferences')} class="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Back to user profile</p>
+                <button class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-1 px-4 rounded" type="submit">Update</button>
+                <p onClick={() => setComponent('userPreferences')} class="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-2 px-4 rounded">Back to user profile</p>
             </div>
         </form>
     </div>

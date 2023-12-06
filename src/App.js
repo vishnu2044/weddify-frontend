@@ -21,6 +21,8 @@ import AdminChatBox from './components/admin/AdminChatBox'
 import PremiumPlans from './pages/premium/PremiumPlans';
 import PaymentPage from './components/premiumUserSide/PaymentPage';
 import PaymentConfirmationPage from './components/premiumUserSide/paymentResult/PaymentConfirmationPage';
+import Notification from './pages/notification/Notification';
+import { MatchProvider } from './context/MatchContext';
 
 function App() {
   
@@ -28,6 +30,7 @@ function App() {
     <>
     <Router>
       <AuthProvider>
+        <MatchProvider>
         <Routes>
           <Route Component={FrontPage} path='/' exact/>
           {/* <Route Component={Login} path='/login'/>
@@ -58,9 +61,12 @@ function App() {
             <Route Component={ChatPage} path='chatpage/:username' />
             <Route Component={PaymentPage} path='payment-page' />
             <Route Component={PaymentConfirmationPage} path='payment-confirmation-page' />
+            <Route Component={Notification} path='notification' />
             
           </Route>
         </Routes>
+
+        </MatchProvider>
       </AuthProvider>
     </Router>
     </>

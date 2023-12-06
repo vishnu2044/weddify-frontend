@@ -11,37 +11,37 @@ const Testimonials = () => {
         <h1 class='text-2xl md:text-4xl w-96 mx-auto leading-normal font-bold mb-4 md:mb-12'>Read what others Have to Say</h1>
     </div>
     <div class='flex flex-col md:flex-row justify-center max-w-5xl mx-auto gap-4 md:gap-8'>
-        <div class='bg-[#621a40] cursor-pointer p-4 md:p-8 rounded-xl text-center'>
+        <div class='bg-[#6F859D] cursor-pointer p-4 md:p-8 rounded-xl text-center'>
             <img src={img_01} alt='' class='h-16 md:h-20 mx-auto rounded-xl'/>
             <h4 class='uppercase text-white text-lg md:text-xl pt-2 font-bold'>john</h4>
             <p class='text-sm leading-6 md:leading-7 my-2 md:my-3 font-light text-slate-50'>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
             </p>
-            <button class='bg-btn_primary shadow-sm py-2 px-4 md:py-2.5 md:px-8 rounded-full'>
+            <p class=' bg-[#374d63] text-white mx-3 shadow-sm py-2 px-4 md:py-2.5 md:px-8 rounded-full'>
                 Enquire
-            </button>
+            </p>
         </div>
 
-        <div class='bg-[#621a40]  cursor-pointer p-4 md:p-8 rounded-xl mx-0 md:mx-4 text-center'>
+        <div class='bg-[#6F859D]  cursor-pointer p-4 md:p-8 rounded-xl mx-0 md:mx-4 text-center'>
             <img src={img_02} alt='' class='h-16 md:h-20 mx-auto rounded-xl'/>
             <h4 class='uppercase text-white text-lg md:text-xl pt-2 font-bold'>stella</h4>
             <p class='text-sm leading-6 md:leading-7 my-2 md:my-3 font-light text-slate-50'>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
             </p>
-            <button class='bg-btn_primary shadow-sm py-2 px-4 md:py-2.5 md:px-8 rounded-full'>
+            <p class='bg-[#374d63] text-white mx-3 shadow-sm py-2 px-4 md:py-2.5 md:px-8 rounded-full'>
                 Enquire
-            </button>
+            </p>
         </div>
 
-        <div class='bg-[#621a40] cursor-pointer p-4 md:p-8 rounded-xl text-center'>
+        <div class='bg-[#6F859D] cursor-pointer p-4 md:p-8 rounded-xl text-center'>
             <img src={img_03} alt='' class='h-16 md:h-20 mx-auto rounded-xl'/>
             <h4 class='uppercase text-white text-lg md:text-xl pt-2 font-bold'>steve</h4>
             <p class='text-sm leading-6 md:leading-7 my-2 md:my-3 font-light text-slate-50'>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
             </p>
-            <button class='bg-btn_primary shadow-sm py-2 px-4 md:py-2.5 md:px-8 rounded-full'>
+            <p class='bg-[#374d63] text-white mx-3 shadow-sm py-2 px-4 md:py-2.5 md:px-8 rounded-full'>
                 Enquire
-            </button>
+            </p>
         </div>
     </div>
 </div>

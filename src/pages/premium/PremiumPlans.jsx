@@ -10,6 +10,7 @@ import PlanConfirmation from '../../components/premiumUserSide/PlanConfirmation'
 import MonthlyPlanConfirmation from '../../components/premiumUserSide/MonthlyPlanConfirmation';
 import YearlyPlanConfirmation from '../../components/premiumUserSide/YearlyPlanConfirmation';
 import axios from 'axios';
+import CurrentPlan from '../../components/premiumUserSide/CurrentPlan';
 
 
 const PremiumPlans = () => {
@@ -18,6 +19,8 @@ const PremiumPlans = () => {
   const {authTokens, logoutUser} = useContext(AuthContext)
   let [yearlyPlanConfirmation, setYearlyPlanConfirmation] = useState(false)
   let [monthlyPlanConfirmation, setMonthlyPlanConfirmation] = useState(false)
+  let [userIsPremium, SetUserIsPremium] = useState(false)
+  let [premiumUserData, setPremiumUserData] = useState([])
 
   let YearlyPlanConfirmPopUp = () =>{
     if (yearlyPlanConfirmation === false){
@@ -34,6 +37,8 @@ const PremiumPlans = () => {
       setMonthlyPlanConfirmation(false)
     }
   }
+
+
 
   const getPremiumDetails = async () =>{
     try{
@@ -90,29 +95,67 @@ const PremiumPlans = () => {
     }
   }, []);
 
+
+  const chetUserIsPremium = async() =>{
+    try{
+      let response = await fetch(`${baseUrl}/create-checkout-session/check-user-is-premium/`,{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + authTokens.access, 
+        },
+      });
+      if (response.status === 200){
+        let data = await response.json()
+        SetUserIsPremium(true)
+        setPremiumUserData(data)
+
+
+      }else if (response.status === 404){
+        console.log("user is not premium user")
+      }
+    }catch (error){
+      console.error("error ::", error)
+    }
+  }
+
+  useEffect(()=>{
+    chetUserIsPremium()
+  }, [])
+
   return (
     <div className="bg-gray-100">
       <div className="container pt-2">
         <div className="h-auto">
-          {
-            monthlyPlanConfirmation && <MonthlyPlanConfirmation 
-                                          MonthlyPlanConfirmationPopUp={MonthlyPlanConfirmationPopUp} 
-                                          premiumPlan={premiumPlan}
-                                          handlePayment={handlePayment}
-                                        />
-          }
-          {
-            yearlyPlanConfirmation && <YearlyPlanConfirmation 
-                                        premiumPlan={premiumPlan}
-                                        YearlyPlanConfirmPopUp={YearlyPlanConfirmPopUp}
-                                        handlePayment = {handlePayment}
-                                      />
-          }
-          <FreeVersion  />
-          <MonthlyPackage premiumPlan={premiumPlan} MonthlyPlanConfirmationPopUp={MonthlyPlanConfirmationPopUp} />
-          <YearlyPackage premiumPlan={premiumPlan} YearlyPlanConfirmPopUp={YearlyPlanConfirmPopUp} />
+        {
+          userIsPremium ? (
+            <CurrentPlan premiumUserData={premiumUserData} />
+          ) : (
+            <>
+              {monthlyPlanConfirmation && (
+                <MonthlyPlanConfirmation
+                  MonthlyPlanConfirmationPopUp={MonthlyPlanConfirmationPopUp}
+                  premiumPlan={premiumPlan}
+                  handlePayment={handlePayment}
+                />
+              )}
 
+              {yearlyPlanConfirmation && (
+                <YearlyPlanConfirmation
+                  premiumPlan={premiumPlan}
+                  YearlyPlanConfirmPopUp={YearlyPlanConfirmPopUp}
+                  handlePayment={handlePayment}
+                />
+              )}
 
+              <FreeVersion />
+              <MonthlyPackage premiumPlan={premiumPlan} MonthlyPlanConfirmationPopUp={MonthlyPlanConfirmationPopUp} />
+              <YearlyPackage premiumPlan={premiumPlan} YearlyPlanConfirmPopUp={YearlyPlanConfirmPopUp} />
+            </>
+          )
+        }
+
+          
         </div>
       </div>
     </div>

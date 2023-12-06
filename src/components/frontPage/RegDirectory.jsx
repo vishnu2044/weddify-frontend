@@ -10,8 +10,8 @@ function RegDirectory() {
         <div className='text-div col-3 '>
           <h3 className='regText'>Find your perfect partner</h3>
         </div>
-        <div className='button-div col-2'>
-          <Link className='regButton' to='/signup'>register here</Link>
+        <div className='button-div col-2 '>
+          <Link className='regButton shadow-md' to='/signup'>register here</Link>
          
         </div>
 

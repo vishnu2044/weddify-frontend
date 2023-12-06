@@ -4,17 +4,19 @@ import HomeNavbar from '../components/homePage/HomeNavbar';
 import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { ErrorMessge } from '../alerts/UserAuthentication';
+import Homefooter from '../components/homePage/Homefooter';
+import { baseUrl } from '../Configure/urls';
 
 
 function Home() {
 
   const [showPassword, setShowPassword] = useState(false);
-  let {handleAdminLogin,authTokens } = useContext(AuthContext)
+  let {handleAdminLogin,authTokens, logoutUser } = useContext(AuthContext)
   let navigate = useNavigate()
 
   const checkUserIsAdmin = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/adminpanel/check_user_is_admin/', {
+      const response = await fetch(`${baseUrl}/adminpanel/check_user_is_admin/`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -29,6 +31,7 @@ function Home() {
         }else if (data.check === 'is_normal_user'){
           console.log('user is normal user')
         }else{
+          logoutUser()
           console.log('user is not authenticated');
         }
       } else {
@@ -48,6 +51,7 @@ function Home() {
       <>
         <HomeNavbar />
         <Outlet />
+        <Homefooter />
       </>
   )
 }

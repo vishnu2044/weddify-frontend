@@ -4,6 +4,7 @@ import AuthContext from '../../context/AuthContext';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import cityObj from '../../jsonData/cities.json';
 import religionCasteData from '../../jsonData/religions.json';
+import { baseUrl} from '../../Configure/urls';
 
 const FilterBar = ({
     submitFilterData,
@@ -22,9 +23,6 @@ const FilterBar = ({
     const [caste, setCaste] = useState('');
     const availableCastes = religionCasteData[religion] || []
 
-    
-  
-
 
 
     const handleReligionChangeFilter = (e) =>{
@@ -41,7 +39,7 @@ const FilterBar = ({
 
     let getFliterDetails = async () =>{
         try{
-            let response = await fetch(`http://127.0.0.1:8000/preferedmatches/get_filter_details/`,{
+            let response = await fetch(`${baseUrl}/preferedmatches/get_filter_details/`,{
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',

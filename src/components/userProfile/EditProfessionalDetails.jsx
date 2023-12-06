@@ -3,6 +3,7 @@ import obj from '../../jsonData/degrees.json';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import AuthContext from '../../context/AuthContext';
 import Swal from 'sweetalert2';
+import { baseUrl } from '../../Configure/urls';
 
 const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => {
 
@@ -24,7 +25,7 @@ const EditProfessionalDetails = ({setDisplayComponent, professionalDetails}) => 
             formData.append("organization", e.target.organization.value);
 
             try{
-                const response =  await fetch('http://127.0.0.1:8000/userprofile/updateprofessionaldata/', {
+                const response =  await fetch(`${baseUrl}/userprofile/updateprofessionaldata/`, {
                     method: "PATCH",
                     headers: {
                         'Authorization': 'Bearer ' + String(authTokens.access),

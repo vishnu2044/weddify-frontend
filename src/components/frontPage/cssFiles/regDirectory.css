@@ -3,11 +3,12 @@
     height: auto;
     margin-bottom: 1rem;
     justify-content: center;
-    background-color: #621a40;
+    background-color: #6F859D;
 }
 
 .button-div{
     text-align: center;
+
 }
 
 .text-div{
@@ -16,7 +17,7 @@
 }
 
 .regButton{
-    background-color: #360820; 
+    background-color: #243f5d; 
     border: none;
     border-radius: 1rem;
     color: white;

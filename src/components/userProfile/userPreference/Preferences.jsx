@@ -153,7 +153,7 @@ const Preferences = () => {
     
 
         <div className="bg-gray-100 mt-3 mb-4">
-            <div className="container mx-auto py-8 bg-[#621a40] rounded-xl">
+            <div className="container mx-auto py-8 bg-[#375779] rounded-xl">
                 <h2 className='text-center text-white pb-3'>Your preferences</h2>
 
                 

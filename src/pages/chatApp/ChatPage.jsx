@@ -4,10 +4,12 @@ import ChatList from './ChatList'
 import AuthContext from '../../context/AuthContext'
 import { ErrorMessge } from '../../alerts/UserAuthentication'
 import { baseUrl } from '../../Configure/urls'
+import { useNavigate } from 'react-router-dom'
 
 const ChatPage = () => {
   const [users, setUsers] = useState([])
   const {logoutUser, authTokens, user} = useContext(AuthContext)
+  const navigate = useNavigate()
   
 
   const getUser = async () =>{
@@ -23,14 +25,44 @@ const ChatPage = () => {
       console.log(data)
       setUsers(data)
     }else if (response.status === 400){
-      ErrorMessge({message: "authorization failed !!!!"})
+      ErrorMessge({message: "data didnt get correctly"})
+    }else if (response.status === 400){
       logoutUser()
+      ErrorMessge({message: "authorization failed !!!!"})
     }else{
       ErrorMessge({message : 'something went wrong'})
+      console.log(response.status)
     }
 
   }
+
+  const checkUserIsPremium = async() =>{
+    let response = await fetch(`${baseUrl}/chat_app/check_user_is_premium/`, {
+      method : 'GET',
+      headers : {
+        'Content-Type':'application/json',
+        'Authorization' : 'Bearer '+String(authTokens.access),        
+      }
+    });
+    if (response.status === 200){
+      console.log('user is premium user');
+
+    }else if (response.status === 400){
+      navigate('/home/homefield')
+      ErrorMessge({message : "user didnt have premium membership"})
+
+    }else if (response.status === 401){
+      ErrorMessge({message :'user is not authenticated'})
+      logoutUser()
+
+    }else{
+      ErrorMessge({message : 'an error comes'})
+      console.log("unknown error ::::::::::::::::::::")
+      console.log(response.status )
+    }
+  }
   useEffect(()=>{
+    checkUserIsPremium()
     getUser()
     console.log("users >>>>>", users)
   }, [])

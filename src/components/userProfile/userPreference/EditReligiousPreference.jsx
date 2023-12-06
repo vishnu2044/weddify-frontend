@@ -97,7 +97,7 @@ const EditReligionalPreference = ({religiounalPreference, setComponent }) => {
         
 
         <form class="w-full max-w-lg" onSubmit={updateReligionalPreference}>
-            <h3 className="text-lg font-semibold text-[#a43f75] text-center">Religional Details</h3>
+            <h3 className="text-lg font-semibold  text-center">Religional Details</h3>
 
 
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -169,8 +169,8 @@ const EditReligionalPreference = ({religiounalPreference, setComponent }) => {
             </div>
 
             <div className='flex justify-between'>
-                <button className='bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-1 px-4 rounded' type='submit'>Update</button>
-                <p onClick={() => setComponent('userPreferences')} className='bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded' >Back to user profile</p>
+                <button className='bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-1 px-4 rounded' type='submit'>Update</button>
+                <p onClick={() => setComponent('userPreferences')} className='bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-2 px-4 rounded' >Back to user profile</p>
             </div>
         </form>
 

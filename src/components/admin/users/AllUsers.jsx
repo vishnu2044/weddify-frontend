@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { baseUrl } from '../../../Configure/urls'
 
 const AllUsers = ({adminPanelData, userBlockManagement}) => {
     const navigate = useNavigate()
@@ -36,7 +37,7 @@ const AllUsers = ({adminPanelData, userBlockManagement}) => {
                                         <tr>
                                             <td class="px-2 py-4 whitespace-nowrap">
                                                 <div class="relative">
-                                                    <img class="h-12 w-12 rounded-full object-cover" src={user?.profile_img ? `http://127.0.0.1:8000${user.profile_img}`:'https://i.pravatar.cc/150?img=32'} alt="Avatar" />
+                                                    <img class="h-12 w-12 rounded-full object-cover" src={user?.profile_img ? `${baseUrl}${user.profile_img}`:'https://i.pravatar.cc/150?img=32'} alt="Avatar" />
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">{user?.username}</td>

@@ -4,6 +4,7 @@ import AdminDashBoard from '../../components/admin/AdminDashBoard';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import AuthContext from '../../context/AuthContext';
+import { baseUrl } from '../../Configure/urls';
 
 
 const AdminPanel = () => {
@@ -19,7 +20,7 @@ const AdminPanel = () => {
   
   const checkUserIsAdmin = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/adminpanel/check_user_is_admin/', {
+      const response = await fetch(`${baseUrl}/adminpanel/check_user_is_admin/`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

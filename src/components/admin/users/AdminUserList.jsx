@@ -6,6 +6,7 @@ import { ErrorMessge } from '../../../alerts/UserAuthentication';
 import WomenList from './WomenList';
 import AllUsers from './AllUsers';
 import Swal from 'sweetalert2';
+import { baseUrl } from '../../../Configure/urls';
 
 
 const AdminUserList = () => {
@@ -17,7 +18,7 @@ const AdminUserList = () => {
 
   let getAdminPanelData = async() =>{
     try{
-      let response = await fetch("http://127.0.0.1:8000/adminpanel/get_admin_panel_data/",{
+      let response = await fetch(`${baseUrl}/adminpanel/get_admin_panel_data/`,{
           method: "GET",
           headers :{
               'Content-Type': 'application/json',
@@ -47,7 +48,7 @@ const AdminUserList = () => {
 
   let userBlockManagement = async(userId) =>{
     try{
-      let response = await fetch(`http://127.0.0.1:8000/adminpanel/user_block_management/${userId}/`,{
+      let response = await fetch(`${baseUrl}/adminpanel/user_block_management/${userId}/`,{
           method: "GET",
           headers :{
               'Content-Type': 'application/json',

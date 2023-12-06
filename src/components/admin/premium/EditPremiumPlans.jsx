@@ -60,8 +60,8 @@ const EditPremiumPlans = ({
             alert('An error occurred while processing the response');
         });
     }else if(response.status === 401){
-        alert("authenticaton failed")
-        return logoutUser
+        logoutUser()
+        ErrorMessge({message :"user is not authenticated"})
     }else{
         ErrorMessge({message: "basic details updation failed"})
         console.log(response.error);

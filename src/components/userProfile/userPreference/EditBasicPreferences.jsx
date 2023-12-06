@@ -91,7 +91,7 @@ const EditbasicPreference = ({basicPreference, setComponent}) => {
         
 
         <form class="w-full max-w-lg" onSubmit={updateBasicpreference} >
-        <h3 className="text-lg font-semibold text-[#a43f75] text-center">Edit Basic Preferences</h3>
+        <h3 className="text-lg font-semibold  text-center">Edit Basic Preferences</h3>
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full px-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
@@ -273,8 +273,8 @@ const EditbasicPreference = ({basicPreference, setComponent}) => {
 
 
             <div className='flex justify-between'>
-                <button className='bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-1 px-4 rounded' type='submit'>Update</button>
-                <p onClick={()=>setComponent("userPreferences")} className='bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded' >Back to user profile</p>
+                <button className='bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-1 px-4 rounded' type='submit'>Update</button>
+                <p onClick={()=>setComponent("userPreferences")} className='bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-2 px-4 rounded' >Back to user profile</p>
             </div>
         </form>
 

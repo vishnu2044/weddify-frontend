@@ -50,7 +50,7 @@ const AdminUserProfile = () => {
 
     let userBlockManagement = async(userId) =>{
         try{
-          let response = await fetch(`http://127.0.0.1:8000/adminpanel/user_block_management/${userId}/`,{
+          let response = await fetch(`${baseUrl}/user_block_management/${userId}/`,{
               method: "GET",
               headers :{
                   'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ const AdminUserProfile = () => {
                 <div class="col-span-4 sm:col-span-3">
                     <div class="p-6">
                         <div class="flex flex-col items-center">
-                            <img src={matchProfile?.profile_img ? `http://127.0.0.1:8000${matchProfile.profile_img}`:'https://i.pravatar.cc/150?img=32'} class="w-auto h-auto bg-gray-300 rounded-md shrink-0" />
+                            <img src={matchProfile?.profile_img ? `${baseUrl}${matchProfile.profile_img}`:'https://i.pravatar.cc/150?img=32'} class="w-auto h-auto bg-gray-300 rounded-md shrink-0" />
                         </div>
                     </div>
                 </div>

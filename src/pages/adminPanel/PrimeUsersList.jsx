@@ -69,7 +69,7 @@ const PrimeUsersList = () => {
                                             <tr>
                                                 <td class="px-2 py-4 whitespace-nowrap">
                                                     <div class="relative">
-                                                        <img class="h-12 w-12 rounded-full object-cover" src='https://i.pravatar.cc/150?img=32' alt="Avatar" />
+                                                        <img class="h-12 w-12 rounded-full object-cover" src={user?.profile_img ? `${baseUrl}${user.profile_img}`:'https://i.pravatar.cc/150?img=32'} alt="Avatar" />
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">{user?.username}</td>

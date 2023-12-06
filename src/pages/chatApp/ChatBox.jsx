@@ -5,9 +5,8 @@ import axios from 'axios';
 import { baseUrl } from '../../Configure/urls';
 import AuthContext from '../../context/AuthContext';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ErrorMessge } from '../../alerts/UserAuthentication';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
-import { convertLength } from '@mui/material/styles/cssUtils';
+
 
 const ChatBox = () => {
   const {user} = useContext(AuthContext)

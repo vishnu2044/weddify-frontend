@@ -50,7 +50,7 @@ const ChatList = (
 
                                 <img 
                                     className="rounded-full h-10 w-10" 
-                                    src={usr?.profile_img ? `http://127.0.0.1:8000${usr?.profile_img}`:'https://i.pravatar.cc/150?img=32'}
+                                    src={usr?.profile_img ? `${baseUrl}${usr?.profile_img}`:'https://i.pravatar.cc/150?img=32'}
                                     alt="User" 
                                 />
                                 <div className="ml-2 flex justify-between">

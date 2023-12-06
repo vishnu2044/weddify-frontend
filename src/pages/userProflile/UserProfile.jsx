@@ -11,6 +11,7 @@ import Preferences from '../../components/userProfile/userPreference/Preferences
 import VisitedProfiles from '../../components/userProfile/VisitedProfiles';
 import BlockedMatches from '../../components/userProfile/BlockedMatches';
 import ProfilesVisitedYous from '../../components/userProfile/ProfilesVisitedYous';
+import { baseUrl } from '../../Configure/urls';
 
 
 const UserProfile = () => {
@@ -18,7 +19,7 @@ const UserProfile = () => {
   const [currentComponent, setCurrentComponent]  = useState('UserProfileDetails')
   const [displayComponent, setDisplayComponent] = useState('userDetails')
 
-  let {authTokens} = useContext(AuthContext)
+  let {authTokens, logoutUser} = useContext(AuthContext)
   let [user, setUser] = useState(null)
   let [userProfile, serUserProfile] = useState(null)
   let [basicDetails, setBasicDetails] = useState(null)
@@ -27,7 +28,7 @@ const UserProfile = () => {
 
   const getUserProfile = async () => {
       try {
-          let response = await fetch('http://127.0.0.1:8000/userprofile/userdetails/', {
+          let response = await fetch(`${baseUrl}/userprofile/userdetails/`, {
               method: 'GET',
               headers: {
                   'Content-Type': 'application/json',
@@ -49,8 +50,12 @@ const UserProfile = () => {
                 }
             })
               console.log(response.status);
+          } else if (response.status === 401) {
+              logoutUser()
+              ErrorMessge({message : "unauthorized user"})
           } else {
               alert("An error occurred while getting user profile");
+              console.log(response.status)
           }
           
       } catch (error) {
@@ -60,7 +65,7 @@ const UserProfile = () => {
 
   const getBasicDetails = async () =>{
     try{
-        let response = await fetch('http://127.0.0.1:8000/userprofile/getbasicdetails/',{
+        let response = await fetch(`${baseUrl}/userprofile/getbasicdetails/`,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -81,7 +86,7 @@ const UserProfile = () => {
 
   const getProfesssionalDetails = async () =>{
     try{
-      let response = await fetch('http://127.0.0.1:8000/userprofile/getprofessionaldetails/', {
+      let response = await fetch(`${baseUrl}/userprofile/getprofessionaldetails/`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -104,7 +109,7 @@ const UserProfile = () => {
 
   const getReligionalDetails = async () =>{
     try{
-      let response = await fetch('http://127.0.0.1:8000/userprofile/getreligionaldetails/', {
+      let response = await fetch(`${baseUrl}/userprofile/getreligionaldetails/`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

@@ -13,8 +13,8 @@ const UserPreferences = ({
   <div className="col-span-1 sm:col-span-6">
     <div className="bg-white shadow-xl rounded-2xl p-6">
       <div className="flex justify-between items-center p-3">
-        <h3 className="text-xl font-semibold text-[#a43f75]">Basic Preferences</h3>
-        <p onClick={()=> setComponent("editBasicPreference")} className="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
+        <h3 className="text-xl font-semibold text-[#333d6e]">Basic Preferences</h3>
+        <p onClick={()=> setComponent("editBasicPreference")} className="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
       </div>
       <div className="mt-4 grid grid-cols-2 gap-2 text-gray-600 pt-3">
         <div className="text-right pr-3">
@@ -48,8 +48,8 @@ const UserPreferences = ({
   <div className="col-span-1 sm:col-span-6">
     <div className="bg-white shadow-xl rounded-2xl px-6">
     <div className="flex justify-between items-center px-3 pt-3">
-        <h3 className="text-xl font-semibold text-[#a43f75]">Basic Preferences</h3>
-        <p onClick={()=> setComponent('editProfessionalPreference') } className="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
+        <h3 className="text-xl font-semibold text-[#333d6e]">Basic Preferences</h3>
+        <p onClick={()=> setComponent('editProfessionalPreference') } className="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
       </div>
       <div className="mt-4 grid grid-cols-2 gap-2 text-gray-600">
         <div className="text-right pr-3">
@@ -74,8 +74,8 @@ const UserPreferences = ({
     
     <div className="bg-white shadow-xl rounded-2xl px-6 mt-2">
         <div className="flex justify-between items-center px-3 pt-2">
-            <h3 className="text-xl font-semibold text-[#a43f75]">Religious Preferences</h3>
-            <p onClick={()=>setComponent('editreligionalpreference')} className="bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
+            <h3 className="text-xl font-semibold text-[#333d6e]">Religious Preferences</h3>
+            <p onClick={()=>setComponent('editreligionalpreference')} className="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
       </div>
       <div className="mt-4 grid grid-cols-2 gap-2 text-gray-600">
       <div class="text-right pr-3">

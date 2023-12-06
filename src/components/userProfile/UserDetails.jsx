@@ -18,8 +18,8 @@ const UserDetails = ({setDisplayComponent, basicDetails, religionalDetails, prof
 
                   <div class="bg-white shadow-xl rounded-2xl px-3 py-4">
                     <div className="flex justify-between items-center px-3 ">
-                        <h3 className="text-xl  font-semibold text-[#a43f75]">Basic Details</h3>
-                        <p onClick={() => setDisplayComponent('editBasicDetails')} className="bg-[#621a40] hover-bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
+                        <h3 className="text-xl  font-semibold text-[#6471b1]">Basic Details</h3>
+                        <p onClick={() => setDisplayComponent('editBasicDetails')} className="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
                     </div>
                         <div class="mt-4 grid grid-cols-2 gap-2 text-gray-600  ">
                                     <div class="text-right pr-3">
@@ -58,8 +58,8 @@ const UserDetails = ({setDisplayComponent, basicDetails, religionalDetails, prof
                     <div class="bg-white shadow-xl rounded-2xl p-6">
 
                       <div className="flex justify-between items-center px-3">
-                          <h3 className="text-xl  font-semibold text-[#a43f75]">Professional Details</h3>
-                          <p onClick={() => setDisplayComponent('editProfessionalDetails')} className="bg-[#621a40] hover-bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
+                          <h3 className="text-xl  font-semibold text-[#6471b1]">Professional Details</h3>
+                          <p onClick={() => setDisplayComponent('editProfessionalDetails')} className="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
                       </div>
                       <div class=" grid grid-cols-2 gap-2 text-gray-600 ">
                                     <div class="text-right pr-3">
@@ -86,8 +86,8 @@ const UserDetails = ({setDisplayComponent, basicDetails, religionalDetails, prof
                     <div class="bg-white shadow-xl rounded-2xl mt-2 p-6">
 
                       <div className="flex justify-between items-center px-3">
-                          <h3 className="text-xl  font-semibold text-[#a43f75]">Religional Details</h3>
-                          <p onClick={() => setDisplayComponent('editReligionalDetails')} className="bg-[#621a40] hover-bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
+                          <h3 className="text-xl  font-semibold text-[#6471b1]">Religional Details</h3>
+                          <p onClick={() => setDisplayComponent('editReligionalDetails')} className="bg-[#6471b1] hover:bg-[#333d6e] cursor-pointer text-white font-bold py-2 px-4 rounded">Update</p>
                       </div>
                       <div class=" grid grid-cols-2 gap-2 text-gray-600 ">
                                     <div class="text-right pr-3">

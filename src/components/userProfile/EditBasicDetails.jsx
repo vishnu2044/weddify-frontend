@@ -3,6 +3,7 @@ import { ErrorMessge } from '../../alerts/UserAuthentication'
 import AuthContext from '../../context/AuthContext'
 import Swal from 'sweetalert2';
 import objects from '../../jsonData/cities.json';
+import { baseUrl } from '../../Configure/urls';
 
 const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
 
@@ -27,7 +28,7 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
             formData.append('citizenship', e.target.citizenship.value);
 
             try{
-                const response = await fetch("http://127.0.0.1:8000/userprofile/updatebasicdetails/", {
+                const response = await fetch(`${baseUrl}/userprofile/updatebasicdetails/`, {
                     method: "PATCH",
                     headers: {
                         

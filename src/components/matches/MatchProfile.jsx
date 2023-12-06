@@ -6,20 +6,29 @@ import {MdLocationPin, MdOutlineCastForEducation} from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
+import { Link } from 'react-router-dom';
+import { baseUrl } from '../../Configure/urls';
+import {AiOutlineHeart} from 'react-icons/ai';
+import MactchContext from '../../context/MatchContext';
 
 const MatchProfile = () => {
     const location = useLocation()
     const matchId = location.state.matchId
     let {authTokens, logoutUser} = useContext(AuthContext)
+    let {likeUser, unlikeUser, blockUser, unblockMatch} = useContext(MactchContext)
     let [matchUser, setMatchUser] = useState(null)
     let [matchBasic, setMmatchBasic] = useState(null)
     let [matchProfession, setMatchProfession] = useState(null)
     let [matchReligion, setMatchReligion] = useState(null)
     let [matchProfile, setMatchProfile] = useState(null)
+    
+    let [matchLike, setMatchLike] = useState(false)
+    let [matchBlock, setMatchBlock] = useState(false)
+    let [blockPopUp, setBlockPopUp] = useState(false)
 
     let getMatchProfile = async () =>{
         try{
-            let response = await fetch(`http://127.0.0.1:8000/preferedmatches/getmatchprofile/${matchId}`,{
+            let response = await fetch(`${baseUrl}/preferedmatches/getmatchprofile/${matchId}`,{
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,10 +38,15 @@ const MatchProfile = () => {
             if (response.status === 200){
                 let data = await response.json(); 
                 setMatchUser(data.user)
+                console.log("match profile data :::::::::::::::::::::::")
+                console.log("match profile data :::::::::::::::::::::::", data.user)
+                console.log("match profile data :::::::::::::::::::::::")
                 setMmatchBasic(data.basic)
                 setMatchProfession(data.professional)
                 setMatchReligion(data.religional)
                 setMatchProfile(data.profile)
+                setMatchLike(data.like)
+                setMatchBlock(data.block)
 
             }else if (response.status === 401){
                 ErrorMessge({message: "authentication failed!!"})
@@ -45,6 +59,26 @@ const MatchProfile = () => {
             console.error("An error occurred:", error);
         }
     }
+    const handleButtonManagement = async ({ match_id: matchId, button }) => {
+        try {
+            if (button === 'likeUser'){
+                await likeUser({ match_id: matchId });
+            }else if (button === 'unLikeUser'){
+                await unlikeUser({ match_id: matchId });
+            }else if (button === 'block'){
+                await blockUser({ match_id: matchId });
+
+            }else if (button === 'unblock'){
+                await unblockMatch({ match_id: matchId });
+
+            }
+            
+            await getMatchProfile();  
+        } catch (error) {
+            console.error('Error handling unlike user or getting user', error);
+        }
+    }
+    
 
     useEffect(()=>{
         getMatchProfile()
@@ -57,7 +91,7 @@ const MatchProfile = () => {
                 <div class="col-span-4 sm:col-span-3">
                     <div class="p-6">
                         <div class="flex flex-col items-center">
-                            <img src={matchProfile?.profile_img ? `http://127.0.0.1:8000${matchProfile.profile_img}`:'https://i.pravatar.cc/150?img=32'} class="w-auto h-auto bg-gray-300 rounded-md shrink-0" />
+                            <img src={matchProfile?.profile_img ? `${baseUrl}${matchProfile.profile_img}`:'https://i.pravatar.cc/150?img=32'} class="w-auto h-auto bg-gray-300 rounded-md shrink-0" />
                         </div>
                     </div>
                 </div>
@@ -82,10 +116,32 @@ const MatchProfile = () => {
                             </div>
                         </div>
 
-                        <div class="mt-6 flex flex-wrap gap-4">
-                            <p className="bg-[#ff2525] text-white shadow-md py-2 px-4 md:py-2.5 md:px-8  rounded-lg justify-center"> Like  </p>
-                            <p className="bg-[#64b17f] text-white shadow-md py-2 px-4 md:py-2.5 md:px-8  rounded-lg justify-center"> Chat </p>
-                            <p className="bg-[#969696] text-white shadow-md py-2 px-4 md:py-2.5 md:px-8  rounded-lg justify-center"> remove </p>
+                        <div class="mt-6 flex flex-wrap gap-2">
+
+                            {
+                                matchLike ?
+                                (<p 
+                                    onClick={()=>handleButtonManagement({match_id : matchUser.id, button:'unLikeUser'})} 
+                                    className="bg-[#ff2525] text-white cursor-pointer shadow-md py-2 px-2 md:py-2.5 md:px-8 mx-2 rounded-lg justify-center"> <AiOutlineHeart className='text-2xl'/> </p>)
+                                    :
+                                (<p 
+                                    onClick={()=>handleButtonManagement({match_id : matchUser.id, button:'likeUser'})}  
+                                    className="  shadow-md py-2 px-2 md:py-2.5 cursor-pointer md:px-8 mx-2 rounded-lg justify-center"> <AiOutlineHeart className='text-2xl'/> </p>)
+                            }
+                            {
+                                matchBlock ?
+
+                                (<p 
+                                    onClick={()=>handleButtonManagement({match_id : matchUser.id, button:'unblock'})}
+                                    className="bg-[#61809d] cursor-pointer text-white shadow-md py-2 px-4 md:py-2.5 md:px-8  rounded-lg justify-center"> Unblock </p>)
+                                :
+                                (<p 
+                                    onClick={()=>handleButtonManagement({match_id : matchUser.id, button:'block'})}
+                                    className="bg-[#4b6985] cursor-pointer text-white shadow-md py-2 px-4 md:py-2.5 md:px-8  rounded-lg justify-center"> Block </p>)
+                            }
+                            <Link to={`/home/chatpage/${matchUser?.id ? matchUser.id : null}`}  className='no-underline'>
+                                <p className="bg-[#64b17f] text-white shadow-md py-2 px-4 md:py-2.5 md:px-8  rounded-lg justify-center"> Chat </p>
+                            </Link>
                         </div>
 
                     </div>

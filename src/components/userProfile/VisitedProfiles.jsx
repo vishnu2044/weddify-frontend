@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../context/AuthContext';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../Configure/urls';
 
 const VisitedProfiles = ({setCurrentComponent}) => {
 
@@ -11,7 +12,7 @@ const VisitedProfiles = ({setCurrentComponent}) => {
 
   const getViewedProfiles = async () =>{
     try{
-      let response = await fetch('http://127.0.0.1:8000/preferedmatches/viewed_profiles/', {
+      let response = await fetch(`${baseUrl}/preferedmatches/viewed_profiles/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

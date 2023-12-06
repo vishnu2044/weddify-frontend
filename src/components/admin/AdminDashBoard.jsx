@@ -5,6 +5,7 @@ import { ErrorMessge } from '../../alerts/UserAuthentication';
 import AuthContext from '../../context/AuthContext';
 import UsersChat from './charts/UsersChat';
 import PremiumChart from './charts/PremiumChart';
+import { baseUrl } from '../../Configure/urls';
 
 const AdminDashBoard = () => {
   let [menuOpen, setMenuOpen] = useState(false);
@@ -13,8 +14,9 @@ const AdminDashBoard = () => {
   let [adminPanelData, setAdminPanelData] = useState('')
 
   const getAdminPanelData = async() =>{
+    console.log('admin panel function is workin!!!')
     try{
-      let response = await fetch("http://127.0.0.1:8000/adminpanel/get_admin_panel_data/",{
+      let response = await fetch(`${baseUrl}/adminpanel/get_admin_panel_data/`,{
           method: "GET",
           headers :{
               'Content-Type': 'application/json',
@@ -24,9 +26,10 @@ const AdminDashBoard = () => {
       if (response.status=== 200){
           let data = await response.json();
           setAdminPanelData(data)
+          console.log(data)
       }else if (response.status === 401){
-          ErrorMessge({message:"unauthorized : not success"})
           logoutUser()
+          ErrorMessge({message:"unauthorized : not success"})
           console.log(response.status);
       }else if (response.status === 400){
           ErrorMessge({message:"complete your profile"})
@@ -42,7 +45,9 @@ const AdminDashBoard = () => {
   }
 
   useEffect(()=>{
+    
     getAdminPanelData()
+    
   },[])
 
   return (
@@ -98,7 +103,7 @@ const AdminDashBoard = () => {
                             <tr key={user.id}>
                                 <td className='px-6 py-4 whitespace-nowrap'>
                                     <div className='relative'>
-                                        <img className='h-12 w-12 rounded-full object-cover' src={user?.profile_img ? `http://127.0.0.1:8000${user.profile_img}` : 'https://i.pravatar.cc/150?img=32'} alt='Avatar' />
+                                        <img className='h-12 w-12 rounded-full object-cover' src={user?.profile_img ? `${baseUrl}${user.profile_img}` : 'https://i.pravatar.cc/150?img=32'} alt='Avatar' />
                                     </div>
                                 </td>
                                 <td className='px-6 py-4 whitespace-nowrap'>{`${user?.first_name} ${user?.last_name}`}</td>
@@ -144,7 +149,7 @@ const AdminDashBoard = () => {
                             <tr key={user.id}>
                                 <td className='px-6 py-4 whitespace-nowrap'>
                                     <div className='relative'>
-                                        <img className='h-12 w-12 rounded-full object-cover' src={user?.profile_img ? `http://127.0.0.1:8000${user.profile_img}` : 'https://i.pravatar.cc/150?img=32'} alt='Avatar' />
+                                        <img className='h-12 w-12 rounded-full object-cover' src={user?.profile_img ? `${baseUrl}${user.profile_img}` : 'https://i.pravatar.cc/150?img=32'} alt='Avatar' />
                                     </div>
                                 </td>
                                 <td className='px-6 py-4 whitespace-nowrap'>{`${user?.first_name} ${user?.last_name}`}</td>

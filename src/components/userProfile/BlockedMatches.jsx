@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../Configure/urls';
 
 const BlockedMatches = ({setCurrentComponent}) => {
     let {authTokens, logoutUser} = useContext(AuthContext)
@@ -10,7 +11,7 @@ const BlockedMatches = ({setCurrentComponent}) => {
 
     const getBlockedMatches = async () =>{
         try{
-          let response = await fetch('http://127.0.0.1:8000/userprofile/get_blocked_matches/', {
+          let response = await fetch(`${baseUrl}/userprofile/get_blocked_matches/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +37,7 @@ const BlockedMatches = ({setCurrentComponent}) => {
     const unblockMatch = async ( match_id) => {
         try {
             console.log('the match id is', match_id);
-            let response = await fetch(`http://127.0.0.1:8000/userprofile/unblock_match/${match_id}/`, {
+            let response = await fetch(`${baseUrl}/userprofile/unblock_match/${match_id}/`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
@@ -84,14 +85,14 @@ const BlockedMatches = ({setCurrentComponent}) => {
 
                             <div className="p-3 my-2 flex items-center bg-[#EFF6FE] justify-between cursor-pointer rounded-md hover:bg-[#c5ddf9] border border-solid border-gray-700">
                                 <div className="flex items-center">
-                                    <img className="rounded-full h-14 w-14" src={blockedMatch?.profile_img ? `http://127.0.0.1:8000/${blockedMatch.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" }  />
+                                    <img className="rounded-full h-14 w-14" src={blockedMatch?.profile_img ? `${baseUrl}${blockedMatch.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" }  />
                                     <div className="ml-2 flex flex-col">
                                         <div className="leading-snug text-sm text-gray-900 font-bold">{blockedMatch.first_name} {blockedMatch.last_name}</div>
                                         <div className="leading-snug text-xs text-gray-600">last visited : </div>
                                     </div>
                                 </div>
                                 <div className='flex justify-between'>
-                                    <p className="h-7 mt-3 px-3 text-md font-semibold text-white mx-2 bg-[#64b17b] shadow-md rounded-full hover:bg-[#52b36a]">View</p>
+                                    <p onClick={()=> navigate("/home/matchprofile", {state : {matchId : blockedMatch.id }} )} className="h-7 mt-3 px-3 text-md font-semibold text-white mx-2 bg-[#64b17b] shadow-md rounded-full hover:bg-[#52b36a]">View</p>
                                     <p onClick={()=>unblockMatch( blockedMatch.id)} className="h-7 mt-3 px-3 text-md font-semibold text-white mx-2 bg-[#6471B1] shadow-md rounded-full hover:bg-[#4e5a93]">Unblock</p>
 
                                 </div>

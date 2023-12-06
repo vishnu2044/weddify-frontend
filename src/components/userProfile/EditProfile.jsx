@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import AuthContext from '../../context/AuthContext';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import Swal from 'sweetalert2';
+import { baseUrl } from '../../Configure/urls';
 
 
 
@@ -62,7 +63,7 @@ const EditProfile = ({ userProfile, user, setCurrentComponent }) => {
                 
             }
             try{
-                const response = await fetch('http://127.0.0.1:8000/userprofile/updateprofile/', {
+                const response = await fetch(`${baseUrl}/userprofile/updateprofile/`, {
                     method: "PATCH",
                     headers: {
                         
@@ -205,8 +206,8 @@ const EditProfile = ({ userProfile, user, setCurrentComponent }) => {
             </div>
 
             <div className='flex justify-between'>
-                <button className='bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-1 px-4 rounded' type='submit'>Update</button>
-                <p className='bg-[#621a40] hover:bg-[#a43f75] cursor-pointer text-white font-bold py-2 px-4 rounded' onClick={() => setCurrentComponent('uUserProfileDetails')}>Back to user profile</p>
+                <button className='bg-[#6471B1] hover:bg-[#6471B1] cursor-pointer text-white font-bold py-1 px-4 rounded' type='submit'>Update</button>
+                <p className='bg-[#6471B1] hover:bg-[#2f3762] cursor-pointer text-white font-bold py-2 px-4 rounded' onClick={() => setCurrentComponent('UserProfileDetails')}>Back to user profile</p>
             </div>
         </form>
 

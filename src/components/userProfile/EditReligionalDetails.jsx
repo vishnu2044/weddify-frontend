@@ -4,6 +4,7 @@ import object from '../../jsonData/stars.json';
 import AuthContext from '../../context/AuthContext';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import Swal from 'sweetalert2';
+import { baseUrl } from '../../Configure/urls';
 
 const EditReligionalDetails = ({religionalDetails , setDisplayComponent}) => {
     const [religion, setReligion] = useState('');
@@ -36,7 +37,7 @@ const EditReligionalDetails = ({religionalDetails , setDisplayComponent}) => {
         
         
         try{
-            const response = await fetch('http://127.0.0.1:8000/userprofile/updatereligionaldata/', {
+            const response = await fetch(`${baseUrl}/userprofile/updatereligionaldata/`, {
                 method : "PATCH",
                 headers: {
                     'Authorization': 'Bearer ' + String(authTokens.access),

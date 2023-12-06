@@ -4,6 +4,7 @@ import MatchesField from '../../components/matches/MatchesField';
 import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
+import { baseUrl } from '../../Configure/urls';
 
 const AllMatches = () => {
   let [allMatch, setAllMatch] = useState([])
@@ -20,7 +21,7 @@ const AllMatches = () => {
 
   const getAllMatches = async () =>{
     try{
-        let response = await fetch("http://127.0.0.1:8000/preferedmatches/getallmatches/",{
+        let response = await fetch(`${baseUrl}/preferedmatches/getallmatches/`,{
             method: "GET",
             headers :{
                 'Content-Type': 'application/json',
@@ -39,7 +40,6 @@ const AllMatches = () => {
             ErrorMessge({message: "and error comes!!"})
             console.log(response.status)
         }
-        
     }catch (error) {
         console.error("An error occurred:", error);
     }
@@ -62,7 +62,7 @@ let submitFilterData = async(e) =>{
       console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",formData)
 
       try{
-          let response = await fetch('http://127.0.0.1:8000/preferedmatches/filtering_matches/', {
+          let response = await fetch(`${baseUrl}/preferedmatches/filtering_matches/`, {
               method : "PATCH",
               headers : {
                   'Authorization' : 'Bearer ' + String(authTokens.access)
@@ -108,7 +108,7 @@ let matchSearch = async(e) =>{
   formData.append('search_match', e.target.search_match.value)
 
   try{
-    let response = await fetch('http://127.0.0.1:8000/preferedmatches/search_matches/',{
+    let response = await fetch(`${baseUrl}/preferedmatches/search_matches/`,{
       method: "PATCH",
       headers: {
         'Authorization': 'Bearer ' + String(authTokens.access),
