@@ -57,13 +57,13 @@ const FilterBar = ({
                 ErrorMessge({message: "authentication failed!!"})
                 logoutUser()
             }else if (response.status === 400){
-                ErrorMessge({message: "data didnt get"})
+                ErrorMessge({message: "data didnt get in filter method"})
             }else{
-                ErrorMessge({message: "An error comes!!"})
+                ErrorMessge({message: "An error comes while filtering!!"})
                 console.log(response.status);
             }
         } catch (error) {
-            console.error("An error occurred:", error);
+            console.error("An error occurred while filtering:", error);
         }
     }
 

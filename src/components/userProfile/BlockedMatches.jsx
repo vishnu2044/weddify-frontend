@@ -22,12 +22,12 @@ const BlockedMatches = ({setCurrentComponent}) => {
             let data = await response.json()
             setBlockedMatches(data)
           }else if (response.status === 400){
-            ErrorMessge({message:'professional not addedd'})
+            ErrorMessge({message:'bad request'})
           }else if (response.status === 401){
             ErrorMessge({message:'Unauthorized logging out'})
             logoutUser()
           }else{
-            alert("An error occurred");
+            alert("An error occurred ");
           }
         }catch (error){
           console.error("error ::", error)

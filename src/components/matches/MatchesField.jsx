@@ -37,24 +37,21 @@ const MatchesField = ({getAllMatches, allMatch}) => {
                 ErrorMessge({message:'Unauthorized logging out'})
                 logoutUser()
             }else{
-                alert("An error occurred");
+                alert("An error occurred while profile complete check");
             }
         }catch (error){
-          console.error("error ::", error)
+          console.error("error while profile complete check::", error)
         }
       }
     
     
     
     const handleButtonManagement = async ({ match_id: matchId, button }) => {
-        console.log("its working!!!!!!!!!!!!!!!!!")
         try {
             if (button === 'likeUser'){
-                console.log("::::::::::::like the users!!!!!!!!!!!!!!!!!!!!!!")
 
                 await likeUser({ match_id: matchId });
             }else if (button === 'unLikeUser'){
-                console.log("unlike the users!!!!!!!!!!!!!!!!!!!!!!")
                 await unlikeUser({ match_id: matchId });
 
             }else if(button === 'block'){

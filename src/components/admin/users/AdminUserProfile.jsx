@@ -40,11 +40,11 @@ const AdminUserProfile = () => {
                 ErrorMessge({message: "authentication failed!!"})
                 logoutUser()
             }else{
-                ErrorMessge({message: "An error comes!!"})
+                ErrorMessge({message: "An error comes while get user profile admin side!!"})
                 console.log(response.status);
             }
         } catch (error) {
-            console.error("An error occurred:", error);
+            console.error("An error occurred while get user profile admin side:", error);
         }
     }
 
@@ -82,15 +82,15 @@ const AdminUserProfile = () => {
               logoutUser()
               console.log(response.status);
           }else if (response.status === 400){
-              ErrorMessge({message:"complete your profile"})
+              ErrorMessge({message:"bad reqeust"})
     
           }else{
-              ErrorMessge({message: "and error comes!!"})
+              ErrorMessge({message: "and error comes while user block management !!"})
               console.log(response.status)
           }
           
         }catch (error) {
-          console.error("An error occurred:", error);
+          console.error("An error occurred while user block management:", error);
         } 
       }
 

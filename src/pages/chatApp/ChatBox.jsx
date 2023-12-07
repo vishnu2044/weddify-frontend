@@ -168,7 +168,7 @@ const ChatBox = () => {
           <div className='flex'>
             <img
               className="rounded-full h-10 w-10"
-              src={senderDetails?.profile_img ? `http://127.0.0.1:8000${senderDetails?.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
+              src={senderDetails?.profile_img ? `${baseUrl}${senderDetails?.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
               alt="User"
             />
             <div className="my-2 flex flex-col">
@@ -188,7 +188,7 @@ const ChatBox = () => {
                 <div className='flex' key={idx}>
                   <img
                     className="rounded-full h-10 w-10 mx-1 shadow-md"
-                    src={senderDetails?.profile_img ? `http://127.0.0.1:8000${senderDetails?.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
+                    src={senderDetails?.profile_img ? `${baseUrl}${senderDetails?.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
                     alt="User"
                   />
                   <div className="flex justify-start">
@@ -208,7 +208,7 @@ const ChatBox = () => {
                   </div>
                   <img
                     className="rounded-full h-10 w-10 mx-1 shadow-md"
-                    src={recipientDetails?.profile_img ? `http://127.0.0.1:8000${recipientDetails?.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
+                    src={recipientDetails?.profile_img ? `${baseUrl}${recipientDetails?.profile_img}` : 'https://i.pravatar.cc/150?img=32'}
                     alt="User"
                   />
                 </div>

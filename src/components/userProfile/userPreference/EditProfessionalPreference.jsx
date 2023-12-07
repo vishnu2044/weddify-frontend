@@ -3,6 +3,7 @@ import obj from '../../../jsonData/degrees.json';
 import AuthContext from '../../../context/AuthContext';
 import Swal from 'sweetalert2';
 import { ErrorMessge } from '../../../alerts/UserAuthentication';
+import { baseUrl } from '../../../Configure/urls';
 
 
 const EditProfessionalPreference = ({
@@ -27,7 +28,7 @@ const EditProfessionalPreference = ({
             formData.append("organization", e.target.organization.value);
 
             try{
-                const response =  await fetch('http://127.0.0.1:8000/userpreferences/updateprfessionalpreference/', {
+                const response =  await fetch(`${baseUrl}/userpreferences/updateprfessionalpreference/`, {
                     method: "PATCH",
                     headers: {
                         'Authorization': 'Bearer ' + String(authTokens.access),
@@ -50,7 +51,7 @@ const EditProfessionalPreference = ({
                       
                       Toast.fire({
                         icon: 'success',
-                        title: 'prfessional preferences updated successfully'
+                        title: 'professional preferences updated successfully'
                       })
 
                 }else if (response.status === 400){
@@ -64,13 +65,13 @@ const EditProfessionalPreference = ({
                     })
                     .catch(error =>{
                         console.error("error :::::::::::", error);
-                        alert('An error occurred while processing the response');
+                        alert('An error occurred while professional preference');
                     })
 
                 }else if (response.status === 401){
                     return logoutUser
                 }else{
-                    ErrorMessge({message:'professional details upload failed!'})
+                    ErrorMessge({message:'professional details update failed!'})
                     console.log(response.error);
                 }
 

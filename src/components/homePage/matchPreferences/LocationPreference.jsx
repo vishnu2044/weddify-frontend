@@ -33,12 +33,12 @@ import { baseUrl } from '../../../Configure/urls';
                     ErrorMessge({message:"complete your profile"})
                     navigate("/home/userprofile")
                 }else{
-                    ErrorMessge({message: "and error comes!!"})
+                    ErrorMessge({message: "and error comes while get matches by location!!"})
                     console.log(response.status)
                 }
                 
             }catch (error) {
-                console.error("An error occurred:", error);
+                console.error("An error occurred while get matches by location", error);
             }
         }
 
@@ -65,12 +65,12 @@ import { baseUrl } from '../../../Configure/urls';
                     ErrorMessge({message:"error get while get matches"})
                     console.log(response.status);
                 }else{
-                    ErrorMessge({message: "and error comes!!"})
+                    ErrorMessge({message: "and error comes while get all matches!!"})
                     console.log(response.status)
                 }
                 
             }catch (error) {
-                console.error("An error occurred:", error);
+                console.error("An error occurred while get all matches:", error);
             }
         }
 

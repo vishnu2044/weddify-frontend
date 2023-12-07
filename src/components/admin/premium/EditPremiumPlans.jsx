@@ -16,9 +16,6 @@ const EditPremiumPlans = ({
     let formData = new FormData()
     formData.append('monthly_price', e.target.monthly_price.value)
     formData.append('yearly_price', e.target.yearly_price.value)
-
-    console.log("monthly ::::::::", e.target.monthly_price.value)
-    console.log("yearly_price ::::::::", e.target.yearly_price.value)
     try{
       const response = await fetch(`${baseUrl}/adminpanel/edit-premium-plans/`, {
         method: 'PATCH',
@@ -49,27 +46,25 @@ const EditPremiumPlans = ({
       }else if (response.status === 400){
         response.json()
         .then(data => {
-            if (data.error) {
-                ErrorMessge({message: data.error })
-            } else {
-                alert('An error occurred');
-            }
-        })
-        .catch(error => {
+        if (data.error) {
+          ErrorMessge({message: data.error })
+        } else {
+          alert('An error occurred');
+        }
+        }).catch(error => {
             console.error('Error parsing response:', error);
-            alert('An error occurred while processing the response');
-        });
-    }else if(response.status === 401){
-        logoutUser()
-        ErrorMessge({message :"user is not authenticated"})
-    }else{
-        ErrorMessge({message: "basic details updation failed"})
-        console.log(response.error);
+            alert('An error occurred while updating premium plans (400)');
+          });
+      }else if(response.status === 401){
+            logoutUser()
+            ErrorMessge({message :"user is not authenticated"})
+      }else{
+            ErrorMessge({message: "basic details updation failed"})
+            console.log(response.error);
+      }
+    }catch (error){
+        console.error("An error occurred while updating premium plans", error);
     }
-}catch (error){
-    console.error("an error comes !!!!!!!!!!", error);
-    alert("catched an error look console")
-}
 }
 
 

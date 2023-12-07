@@ -34,7 +34,7 @@ const HomePageNotification = () => {
         setVisitedMatchCount(data.match_count)
         console.log("visited profiles::::::::::::::::",data.data)
       } else if (response.status === 400) {
-        ErrorMessge({ message: 'Professional not added' });
+        ErrorMessge({ message: 'Professional not added ' });
       } else if (response.status === 401) {
         logoutUser();
         ErrorMessge({ message: 'Unauthorized logging out' });
@@ -42,7 +42,7 @@ const HomePageNotification = () => {
         alert('An error occurred while profile visited matches');
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error: while profile visited matches', error);
     }
   };
 
@@ -71,7 +71,7 @@ const HomePageNotification = () => {
         alert('An error while profile liked matches');
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error: while profile liked matches', error);
     }
   };
 

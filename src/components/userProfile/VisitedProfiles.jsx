@@ -74,7 +74,7 @@ const VisitedProfiles = ({setCurrentComponent}) => {
 
                         <div className="p-3 my-2 flex items-center bg-[#EFF6FE] justify-between cursor-pointer rounded-md hover:bg-[#c5ddf9] border border-solid border-gray-700">
                             <div className="flex items-center">
-                                <img className="rounded-full h-14 w-14" src={profile?.profile_img ? `http://127.0.0.1:8000${profile?.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" } />
+                                <img className="rounded-full h-14 w-14" src={profile?.profile_img ? `${baseUrl}${profile?.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" } />
                                 <div className="ml-2 flex flex-col">
                                     <div className="leading-snug text-sm text-gray-900 font-bold">{profile.first_name} {profile.last_name}</div>
                                     <div className="leading-snug text-xs text-gray-600">{profile.visited_time} </div>

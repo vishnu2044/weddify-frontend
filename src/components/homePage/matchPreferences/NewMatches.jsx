@@ -31,11 +31,11 @@ const NewMatches = () => {
                 ErrorMessge({message: "unauthorized : not success !!"})
                 logoutUser()
             }else {
-                ErrorMessge({message: "an error occurred !!!!"})
+                ErrorMessge({message: "an error occurred while get new matches !!!!"})
                 console.log(response.status)
             }
         }catch (error) {
-            console.error("An error occurred:", error);
+            console.error("An error occurred while get new matches ", error);
         }
     }
 

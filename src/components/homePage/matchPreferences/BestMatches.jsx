@@ -26,7 +26,7 @@ const BestMatches = () => {
                 let data = await response.json()
                 setPreferedMatchData(data)
             }else if (response.status === 400){
-                ErrorMessge({message : 'error get while updating the prefered matches'})
+                ErrorMessge({message : 'error get while getting prefered matches'})
 
             }else if (response.status === 401){
                 ErrorMessge({message : "Unauthorized!"})
@@ -43,15 +43,11 @@ const BestMatches = () => {
         console.log("its working!!!!!!!!!!!!!!!!!")
         try {
             if (button === 'likeUser'){
-                console.log("::::::::::::like the users!!!!!!!!!!!!!!!!!!!!!!")
-
                 await likeUser({ match_id: matchId });
-            }else if (button === 'unLikeUser'){
-                console.log("unlike the users!!!!!!!!!!!!!!!!!!!!!!")
-                await unlikeUser({ match_id: matchId });
 
+            }else if (button === 'unLikeUser'){
+                await unlikeUser({ match_id: matchId });
             }
-            
             await getPreferedMatches();  
         } catch (error) {
             console.error('Error handling unlike user or getting user', error);

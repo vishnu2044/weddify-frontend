@@ -38,9 +38,6 @@ const MatchProfile = () => {
             if (response.status === 200){
                 let data = await response.json(); 
                 setMatchUser(data.user)
-                console.log("match profile data :::::::::::::::::::::::")
-                console.log("match profile data :::::::::::::::::::::::", data.user)
-                console.log("match profile data :::::::::::::::::::::::")
                 setMmatchBasic(data.basic)
                 setMatchProfession(data.professional)
                 setMatchReligion(data.religional)
@@ -52,11 +49,11 @@ const MatchProfile = () => {
                 ErrorMessge({message: "authentication failed!!"})
                 logoutUser()
             }else{
-                ErrorMessge({message: "An error comes!!"})
+                ErrorMessge({message: "An error comes get match profile!!"})
                 console.log(response.status);
             }
         } catch (error) {
-            console.error("An error occurred:", error);
+            console.error("An error occurred while get match profile:", error);
         }
     }
     const handleButtonManagement = async ({ match_id: matchId, button }) => {

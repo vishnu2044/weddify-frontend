@@ -7,6 +7,7 @@ import { ErrorMessge } from '../../../alerts/UserAuthentication'
 import EditProfessionalPreference from './EditProfessionalPreference'
 import EditReligionalPreference from './EditReligiousPreference'
 import { useNavigate } from 'react-router-dom'
+import { baseUrl } from '../../../Configure/urls'
 
 const Preferences = () => {
   const [component, setComponent] = useState('userPreferences')
@@ -19,7 +20,7 @@ const Preferences = () => {
 
   const getBasicPreferences = async () =>{
     try{
-      let response = await fetch('http://127.0.0.1:8000/userpreferences/getbasicpreferences/',{
+      let response = await fetch(`${baseUrl}/userpreferences/getbasicpreferences/`,{
         method : 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -45,13 +46,13 @@ const Preferences = () => {
         console.log(response.status);
       }
     } catch (error) {
-      console.error("An error occurred:", error);
+      console.error("An error occurred while basic preference:", error);
     }
   }
 
   const getprofessionalpreference = async () =>{
     try{
-      let response = await fetch('http://127.0.0.1:8000/userpreferences/getprofessionalpreferences/',{
+      let response = await fetch(`${baseUrl}/userpreferences/getprofessionalpreferences/`,{
         method : 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -73,18 +74,18 @@ const Preferences = () => {
         
         console.log(response.status);
       }else{
-        alert("an error occurrect");
+        alert("an error occurrence while professional preference");
         console.log(response.status);
       }
     } catch (error) {
-      ErrorMessge({message:"an error occurred"})
+      ErrorMessge({message:"an error occurred while get professional preference"})
       console.error("An error occurred:", error);
     }
   }
 
   const getReligiounalPreference = async () =>{
     try{
-      let response = await fetch('http://127.0.0.1:8000/userpreferences/getreligiouspreferences/',{
+      let response = await fetch(`${baseUrl}/userpreferences/getreligiouspreferences/`,{
         method : 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -111,7 +112,7 @@ const Preferences = () => {
         console.log(response.status);
       }
     } catch (error) {
-      ErrorMessge({message:"an error occurred"})
+      ErrorMessge({message:"an error occurred while religional preference"})
       console.error("An error occurred:", error);
     }
   }

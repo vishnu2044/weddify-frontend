@@ -66,7 +66,7 @@ const Signup = ({setActiveComponent}) => {
                 }else if (data){
                     console.log(data)
                 }else{
-                    alert('somethingwrong')
+                    alert('somethingwrong while signup function')
                 }
             } 
         }catch(errors){

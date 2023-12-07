@@ -33,10 +33,10 @@ const HomeField = () => {
         ErrorMessge({message:'Unauthorized logging out'})
         logoutUser()
       }else{
-        alert("An error occurred");
+        alert("An error occurred while check profile complete");
       }
     }catch (error){
-      console.error("error ::", error)
+      console.error("error while check profile complete ::", error)
     }
   }
 

@@ -3,6 +3,7 @@ import objects from '../../../jsonData/cities.json';
 import AuthContext from '../../../context/AuthContext';
 import { ErrorMessge } from '../../../alerts/UserAuthentication';
 import Swal from 'sweetalert2';
+import { baseUrl } from '../../../Configure/urls';
 
 function isInteger(value) {
     return value.isInteger
@@ -13,7 +14,6 @@ const EditbasicPreference = ({basicPreference, setComponent}) => {
     let {authTokens, logoutUser} = useContext(AuthContext)
     
     let updateBasicpreference = async (e) => {
-        console.log("age form :::::::::::::::::::::::::::::::::::::::::::",e.target.age_from.value)
         e.preventDefault();
         if (e.target.age_from.value < 18) {
             ErrorMessge({ message: "The minimum age should be greater than 18" });
@@ -32,10 +32,9 @@ const EditbasicPreference = ({basicPreference, setComponent}) => {
           formData.append("location", e.target.location.value);
           formData.append("height", e.target.height.value);
           formData.append("body_type", e.target.body_type.value);
-          console.log("form data ::::::::::::::::::::", formData);
       
           try {
-            let response = await fetch("http://127.0.0.1:8000/userpreferences/updatebasicpreferences/", {
+            let response = await fetch(`${baseUrl}/userpreferences/updatebasicpreferences/`, {
               method: "PATCH",
               headers: {
                 'Authorization': 'Bearer ' + String(authTokens.access),
@@ -59,23 +58,23 @@ const EditbasicPreference = ({basicPreference, setComponent}) => {
                   
                   Toast.fire({
                     icon: 'success',
-                    title: 'religional details updated successfully'
+                    title: 'basic preference updated successfully'
                   })
             } else if (response.status === 400) {
               const data = await response.json();
               if (data.error) {
                 ErrorMessge({ message: data.error });
               } else {
-                ErrorMessge({ message: "An error occurred" });
+                ErrorMessge({ message: "An error occurred while update basic preference" });
               }
             } else if (response.status === 401) {
               logoutUser();
             } else {
-                ErrorMessge({ message: "Error message" });
+                ErrorMessge({ message: "Error message while update basic preference" });
             }
       
           } catch (error) {
-            console.error("An error occurred !!!!!!", error);
+            console.error("An error occurred while updatd basic preference !!!!!!", error);
             ErrorMessge({ message: "An error occurred" });
           }
         }

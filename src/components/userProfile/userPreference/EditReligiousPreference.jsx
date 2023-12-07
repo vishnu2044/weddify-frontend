@@ -4,6 +4,7 @@ import object from '../../../jsonData/stars.json';
 import AuthContext from '../../../context/AuthContext';
 import { ErrorMessge } from '../../../alerts/UserAuthentication';
 import Swal from 'sweetalert2';
+import { baseUrl } from '../../../Configure/urls';
 
 const EditReligionalPreference = ({religiounalPreference, setComponent }) => {
     const [religion, setReligion] = useState('');
@@ -32,11 +33,10 @@ const EditReligionalPreference = ({religiounalPreference, setComponent }) => {
         formData.append('religion', e.target.religion.value);
         formData.append('caste', e.target.caste.value);
         formData.append('star', e.target.star.value);
-        console.log("religion :::::::::::::::::::::::", formData);
         
         
         try{
-            const response = await fetch('http://127.0.0.1:8000/userpreferences/updatereligiounalpreference/', {
+            const response = await fetch(`${baseUrl}/userpreferences/updatereligiounalpreference/`, {
                 method : "PATCH",
                 headers: {
                     'Authorization': 'Bearer ' + String(authTokens.access),
@@ -72,7 +72,7 @@ const EditReligionalPreference = ({religiounalPreference, setComponent }) => {
                 })
                 .catch(error =>{
                     console.error("error :::::::::::", error);
-                    alert('An error occurred while processing the response');
+                    alert('An error occurred while update professional preference');
                 })
 
             }else if (response.status === 401){

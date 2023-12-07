@@ -31,7 +31,6 @@ const MonthlyPlanConfirmation = (
 
   useEffect(()=>{
     amountCalculator()
-    console.log("user>>>>>>>>>>>>>",user.user_id)
   }, [monthCount])
 
 

@@ -8,15 +8,10 @@ const YearlyPlanConfirmation = (
         YearlyPlanConfirmPopUp,
         handlePayment
     }
-) => {
+  ) => {
     let [yearCount, setYearCount] = useState(1)
     let [totalYearAmount, setTotalYyearAmount] = useState(premiumPlan.yearly_price)
     let {user} = useContext(AuthContext)
-
-    
-
-// Now you can use the `premiumType` variable in your code.
-
 
     let yearCountIncrement = () =>{
         setYearCount(yearCount +1)

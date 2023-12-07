@@ -35,12 +35,12 @@ const AdminDashBoard = () => {
           ErrorMessge({message:"complete your profile"})
 
       }else{
-          ErrorMessge({message: "and error comes!!"})
+          ErrorMessge({message: "and error comes while getAdminPanelData!!"})
           console.log(response.status)
       }
       
     }catch (error) {
-      console.error("An error occurred:", error);
+      console.error("An error occurred while getAdminPanelData:", error);
     } 
   }
 

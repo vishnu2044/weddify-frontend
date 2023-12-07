@@ -29,19 +29,19 @@ const AdminUserList = () => {
           let data = await response.json();
           setAdminPanelData(data)
       }else if (response.status === 401){
-          ErrorMessge({message:"unauthorized : not success"})
+          ErrorMessge({message:"unauthorized"})
           logoutUser()
           console.log(response.status);
       }else if (response.status === 400){
-          ErrorMessge({message:"complete your profile"})
+          ErrorMessge({message:"Bad request"})
 
       }else{
-          ErrorMessge({message: "and error comes!!"})
+          ErrorMessge({message: "and error comes while get admin panel data!!"})
           console.log(response.status)
       }
       
     }catch (error) {
-      console.error("An error occurred:", error);
+      console.error("An error occurred while get admin panel data:", error);
     } 
   }
   
@@ -80,15 +80,15 @@ const AdminUserList = () => {
           logoutUser()
           console.log(response.status);
       }else if (response.status === 400){
-          ErrorMessge({message:"complete your profile"})
+          ErrorMessge({message:"Bad request"})
 
       }else{
-          ErrorMessge({message: "and error comes!!"})
+          ErrorMessge({message: "and error comes in user block management!!"})
           console.log(response.status)
       }
       
     }catch (error) {
-      console.error("An error occurred:", error);
+      console.error("An error occurred in user block management:", error);
     } 
   }
 
