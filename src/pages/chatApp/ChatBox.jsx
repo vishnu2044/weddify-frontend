@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { FaUser } from "react-icons/fa";
 import { IoVideocam } from "react-icons/io5";
 import axios from 'axios';
-import { baseUrl } from '../../Configure/urls';
+import { baseUrl, wsBaseUrl } from '../../Configure/urls';
 import AuthContext from '../../context/AuthContext';
 import { useParams, useNavigate } from 'react-router-dom';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
@@ -84,7 +84,7 @@ const ChatBox = () => {
         console.error('error whil axiios user previews chats  :::::::::::: Error:', error);
       });
 
-      const client = new W3CWebSocket(`ws://127.0.0.1:8000/ws/chat/${senderId}/?${recipientid}`)
+      const client = new W3CWebSocket(`${wsBaseUrl}/ws/chat/${senderId}/?${recipientid}`)
       console.log("client data get")
 
       setClientState(client)

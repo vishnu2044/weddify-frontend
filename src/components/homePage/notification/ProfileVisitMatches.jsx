@@ -1,7 +1,9 @@
 import React from 'react';
 import {baseUrl} from '../../../Configure/urls'
+import { useNavigate } from 'react-router-dom';
 
 const ProfileVisitMatches = ({onClose, profileVisitedMatches}) => {
+    const navigate = useNavigate()
   return (
 <div class="flex place-items-start justify-center ">
     <div class="border rounded-lg shadow relative w-xl bg-[#d2ffe3]">
@@ -27,7 +29,7 @@ const ProfileVisitMatches = ({onClose, profileVisitedMatches}) => {
                             <div className="leading-snug text-xs text-gray-600">{match.liked_time}</div>
                         </div>
                     </div>
-                    <div className='flex justify-between'>
+                    <div className='flex justify-between' onClick={()=> navigate("/home/matchprofile", {state : {matchId : match.id }} )}>
                         <p className="h-7 mt-3 px-3 text-md font-semibold text-white mx-2 bg-[#64b17b] shadow-md rounded-full hover:bg-[#52b36a]">View</p>
                     </div>
                 </div>
