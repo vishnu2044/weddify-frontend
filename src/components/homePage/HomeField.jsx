@@ -7,7 +7,6 @@ import { ErrorMessge } from '../../alerts/UserAuthentication';
 import AuthContext from '../../context/AuthContext';
 import MatchesInvite from './banners/MatchesInvite';
 import { baseUrl } from '../../Configure/urls';
-import { defined } from 'chart.js/dist/helpers/helpers.core';
 
 const HomeField = () => {
   let {authTokens, logoutUser} = useContext(AuthContext)
@@ -48,7 +47,8 @@ const HomeField = () => {
       <HomePageNotification  />
 
       <Suspense fallback={
-        <div>loading.....</div>}>
+        <div>loading.....</div>
+      }>
         <BestMatches />
       </Suspense>
 
