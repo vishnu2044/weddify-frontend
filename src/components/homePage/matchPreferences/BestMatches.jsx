@@ -77,7 +77,7 @@ const BestMatches = () => {
                     <div
                         className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-tl-md rounded-bl-md text-center overflow-hidden"
                         style={{
-                            backgroundImage: `url(${match.profile_img ? `${baseUrl}${match.profile_img}` : 'https://i.pravatar.cc/150?img=32'})`
+                            backgroundImage: `url(${match?.profile_img ? `${baseUrl}${match.profile_img}` : 'https://i.pravatar.cc/150?img=32'})`
                         }}
                         title="Woman holding a mug"
                     >
@@ -89,34 +89,34 @@ const BestMatches = () => {
                         <div class="">
                             <p
                                 class="text-gray-900 font-bold text-xl mb-2 hover:text-indigo-600 transition duration-500 ease-in-out">
-                                {match.first_name} {match.last_name}</p>
+                                {match?.first_name} {match?.last_name}</p>
                             <p class="text-sm text-gray-600">
                                 {match.occupation}
                             </p>
-                            <p class="text-gray-500 text-base mt-4">age: {match.age}</p>
-                            <p class="text-gray-500 text-base">{match.location}</p>
+                            <p class="text-gray-500 text-base mt-4">age: {match?.age}</p>
+                            <p class="text-gray-500 text-base">{match?.location}</p>
 
                         </div>
                         
                         <div className="flex flex-wrap justify-center bord cursor-pointer">
                                         
                             <p  
-                                onClick={()=> navigate("/home/matchprofile", {state : {matchId : match.id }} )}
+                                onClick={()=> navigate("/home/matchprofile", {state : {matchId : match?.id }} )}
                                 className="border border-gray-800  shadow-md py-2 px-3 md:py-2.5 md:px-8 mx-1 rounded-lg ">
                                     View
                             </p>
                                     
                             {
                                 match.like ? (
-                                    <p onClick={()=>handlelikeManagement({match_id : match.id, button:'unLikeUser'})}  className="border border-gray-800 bg-red-500 shadow-md py-2 px-3 md:py-2.5 md:px-8 mx-1 rounded-lg justify-center"> <AiOutlineHeart className='text-2xl'/> </p>
+                                    <p onClick={()=>handlelikeManagement({match_id : match?.id, button:'unLikeUser'})}  className="border border-gray-800 bg-red-500 shadow-md py-2 px-3 md:py-2.5 md:px-8 mx-1 rounded-lg justify-center"> <AiOutlineHeart className='text-2xl'/> </p>
                                     ) :
                                     (
 
-                                        <p onClick={()=>handlelikeManagement({match_id : match.id, button:'likeUser'})} className="border border-gray-800 shadow-md py-2 px-3 md:py-2.5 md:px-8 mx-1 rounded-lg justify-center"> <AiOutlineHeart className='text-2xl'/> </p>
+                                        <p onClick={()=>handlelikeManagement({match_id : match?.id, button:'likeUser'})} className="border border-gray-800 shadow-md py-2 px-3 md:py-2.5 md:px-8 mx-1 rounded-lg justify-center"> <AiOutlineHeart className='text-2xl'/> </p>
                                     )
                             }
 
-                            <Link className='no-underline text-black' to={`/home/chatpage/${match.id}`}>
+                            <Link className='no-underline text-black' to={`/home/chatpage/${match?.id}`}>
                                 <p className=" bg-[#bcffd4]  shadow-md py-2 px-3 md:py-2.5 md:px-8 mx-1 rounded-lg justify-center border border-gray-800"> Chat </p>
                             </Link>
                         </div>
