@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState , lazy, Suspense } from 'react'
 import LocationPreference from './matchPreferences/LocationPreference'
 import NewMatches from './matchPreferences/NewMatches'
 import HomePageNotification from './HomePageNotification';
@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { ErrorMessge } from '../../alerts/UserAuthentication';
 import AuthContext from '../../context/AuthContext';
 import MatchesInvite from './banners/MatchesInvite';
-import BestMatches from './matchPreferences/BestMatches';
 import { baseUrl } from '../../Configure/urls';
+import { defined } from 'chart.js/dist/helpers/helpers.core';
 
 const HomeField = () => {
   let {authTokens, logoutUser} = useContext(AuthContext)
 
   const navigate = useNavigate()
-
+  const BestMatches = lazy(() => import('./matchPreferences/BestMatches'));
 
   const checkProfileCompleteHome = async () =>{
     try{
@@ -46,7 +46,13 @@ const HomeField = () => {
   return (
     <div>
       <HomePageNotification  />
-      <BestMatches />
+
+      <Suspense fallback={
+`        <div>loading.....</div>
+      }>`
+        <BestMatches />
+      </Suspense>
+
       <MatchesInvite />
       <NewMatches />
       <LocationPreference />
