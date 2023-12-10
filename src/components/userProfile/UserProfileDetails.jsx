@@ -17,7 +17,7 @@ const UserProfileDetails = ({userProfile, user, setCurrentComponent}) => {
                     <div class="col-span-1 bg-white sm:col-span-3 rounded-lg shadow-md">
                         <div class=" p-6">
                             <div class="flex flex-col items-center">
-                                <img src={userProfile?.profile_img ? `${baseUrl}/${userProfile.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" } class="w-32 h-32 bg-gray-300 rounded-3xl mb-3" alt="" />
+                                <img src={userProfile?.profile_img ? `${baseUrl}${userProfile.profile_img}` : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" } class="w-32 h-32 bg-gray-300 rounded-3xl mb-3" alt="" />
                                 <p>{userProfile?.unique_user_id ? userProfile?.unique_user_id : "user unique id "}</p>
                                 <h1 class="text-xl font-bold">{user?.username}</h1>
                             </div>

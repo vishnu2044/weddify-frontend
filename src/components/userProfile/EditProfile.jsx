@@ -73,6 +73,7 @@ const EditProfile = ({ userProfile, user, setCurrentComponent }) => {
                 })
                 if (response.ok){
                     setCurrentComponent('UserProfileDetails')
+                    
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',

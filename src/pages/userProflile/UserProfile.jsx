@@ -136,7 +136,7 @@ const UserProfile = () => {
     if (currentComponent === 'UserProfileDetails'){
       return <UserProfileDetails  user={user} userProfile={userProfile} setCurrentComponent = {setCurrentComponent} />
     }else if(currentComponent === 'editUser'){
-      return <EditProfile user={user} userProfile={userProfile} setCurrentComponent = {setCurrentComponent} />
+      return <EditProfile user={user} userProfile={userProfile} getUserProfile={getUserProfile} setCurrentComponent = {setCurrentComponent} />
     }else if (currentComponent === 'visitedProfiles'){
       return <VisitedProfiles setCurrentComponent = {setCurrentComponent}/>
     }else if (currentComponent === 'blockedProfiles'){
@@ -170,6 +170,15 @@ const UserProfile = () => {
       
       
   }, [])
+  
+  useEffect(() =>{
+      getUserProfile();
+      getBasicDetails();
+      getProfesssionalDetails();
+      getReligionalDetails();
+      
+      
+  }, [currentComponent, displayComponent])
 
   return (
     <div>
