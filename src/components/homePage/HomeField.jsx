@@ -48,8 +48,7 @@ const HomeField = () => {
       <HomePageNotification  />
 
       <Suspense fallback={
-`        <div>loading.....</div>
-      }>`
+        <div>loading.....</div>}>
         <BestMatches />
       </Suspense>
 
