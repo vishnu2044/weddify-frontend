@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import UserPreferences from './UserPreferences'
 import AuthContext from '../../../context/AuthContext'
-
 import EditBasicPreferences from './EditBasicPreferences'
 import { ErrorMessge } from '../../../alerts/UserAuthentication'
 import EditProfessionalPreference from './EditProfessionalPreference'

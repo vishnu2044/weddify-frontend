@@ -31,11 +31,10 @@ const ChatBox = () => {
   const setUserProfileDetails = async () => {
 
     if (username) {
-      console.log(":::::::::::::::::::",username, "::::::::::::")
       axios.get(`${baseUrl}/chat_app/get-userdetails/${username}`).then((response) => {
         if (response.status === 200) {
           setSenderDetails(response.data); 
-          console.log('<<<<<<<<<<<<<<<<<<< username is added to recipient details >>>>>>>>>>>>>>>');
+          
         }
       });
     } else {
