@@ -148,7 +148,7 @@ const Preferences = () => {
     getprofessionalpreference()
     getReligiounalPreference()
 
-  }, [])
+  }, [component])
   return (
     <>
     
