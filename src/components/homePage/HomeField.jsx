@@ -8,11 +8,13 @@ import AuthContext from '../../context/AuthContext';
 import MatchesInvite from './banners/MatchesInvite';
 import { baseUrl } from '../../Configure/urls';
 
+const BestMatches = lazy(()=> import('./matchPreferences/BestMatches'))
+
 const HomeField = () => {
   let {authTokens, logoutUser} = useContext(AuthContext)
 
   const navigate = useNavigate()
-  const BestMatches = lazy(() => import('./matchPreferences/BestMatches'));
+  // const BestMatches = lazy(() => import());
 
   const checkProfileCompleteHome = async () =>{
     try{
@@ -47,7 +49,7 @@ const HomeField = () => {
       <HomePageNotification  />
 
       <Suspense fallback={
-        <div>loading.....</div>
+        <div>loading..... please wait</div>
       }>
         <BestMatches />
       </Suspense>
