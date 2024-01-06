@@ -7,6 +7,7 @@ import EditProfessionalPreference from './EditProfessionalPreference'
 import EditReligionalPreference from './EditReligiousPreference'
 import { useNavigate } from 'react-router-dom'
 import { baseUrl } from '../../../Configure/urls'
+import { ErrorAlert } from '../../../alerts/ErrorAlert'
 
 const Preferences = () => {
   const [component, setComponent] = useState('userPreferences')
@@ -37,11 +38,10 @@ const Preferences = () => {
         console.log(response.status);
       }
       else if (response.status === 400){
-        ErrorMessge({message: "didnt added basic preferences"})
+        ErrorAlert({message: "didnt added basic preferences"})
         navigate("/home/userprofile")
       }
       else{
-        console.log("didnt get the basic preference details!!!")
         console.log(response.status);
       }
     } catch (error) {
