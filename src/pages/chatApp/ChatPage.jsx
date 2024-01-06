@@ -48,8 +48,8 @@ const ChatPage = () => {
       console.log('user is premium user');
 
     }else if (response.status === 400){
-      navigate('/home/homefield')
-      ErrorMessge({message : "user didnt have premium membership"})
+      navigate('premiumplans')
+      ErrorMessge({message : "Upgrade to permium to chat with your match"})
 
     }else if (response.status === 401){
       ErrorMessge({message :'user is not authenticated'})

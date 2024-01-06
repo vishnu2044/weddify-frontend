@@ -8,6 +8,7 @@ import { baseUrl } from '../../Configure/urls';
 import MactchContext from '../../context/MatchContext';
 import DoubleCheckAlert from '../../alerts/DoubleCheckAlert';
 import BlockUserAlert from '../../alerts/BlockUserAlert';
+import {ErrorAlert} from '../../alerts/ErrorAlert';
 
 
 const MatchesField = ({getAllMatches, allMatch}) => {
@@ -31,7 +32,8 @@ const MatchesField = ({getAllMatches, allMatch}) => {
             console.log("profile is completed")
             
             }else if (response.status === 400){
-                ErrorMessge({message: "complete your profile to to get your matches"})
+                
+                ErrorAlert({message: "complete your profile to to get your matches"})
                 navigate('/home/userprofile')
             }else if (response.status === 401){
                 ErrorMessge({message:'Unauthorized logging out'})

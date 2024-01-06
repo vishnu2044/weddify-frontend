@@ -8,6 +8,7 @@ import AuthContext from '../../context/AuthContext';
 import MatchesInvite from './banners/MatchesInvite';
 import { baseUrl } from '../../Configure/urls';
 import BestMatches from '../../components/homePage/matchPreferences/BestMatches'
+import { ErrorAlert } from '../../alerts/ErrorAlert';
 
 
 
@@ -28,8 +29,8 @@ const HomeField = () => {
       if (response.status === 200){
         console.log("profile is completed")
       }else if (response.status === 400){
-        ErrorMessge({message: "complete your profile to access the site"})
         navigate('/home/userprofile')
+        ErrorAlert({message: "complete your profile to access the site"})
       }else if (response.status === 401){
         ErrorMessge({message:'Unauthorized logging out'})
         logoutUser()

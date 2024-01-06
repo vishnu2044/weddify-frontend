@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../Configure/urls";
 import AuthContext from "./AuthContext";
 import { ErrorMessge } from "../alerts/UserAuthentication";
+import { ErrorAlert } from "../alerts/ErrorAlert";
 
 
 
@@ -113,7 +114,7 @@ export const MatchProvider =  ({children}) =>{
         console.log("profile is completed")
                   
       }else if (response.status === 400){
-        ErrorMessge({message: "complete your profile to to get your matches"})
+        ErrorAlert({message: "complete your profile to to get your matches"})
         navigate('/home/userprofile')
       }else if (response.status === 401){
         ErrorMessge({message:'Unauthorized logging out'})
