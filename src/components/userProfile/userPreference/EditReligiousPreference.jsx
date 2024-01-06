@@ -5,6 +5,7 @@ import AuthContext from '../../../context/AuthContext';
 import { ErrorMessge } from '../../../alerts/UserAuthentication';
 import Swal from 'sweetalert2';
 import { baseUrl } from '../../../Configure/urls';
+import { ErrorAlert } from '../../../alerts/ErrorAlert';
 
 const EditReligionalPreference = ({religiounalPreference, setComponent }) => {
     const [religion, setReligion] = useState('');
@@ -65,7 +66,7 @@ const EditReligionalPreference = ({religiounalPreference, setComponent }) => {
                 response.json()
                 .then(data =>{
                     if (data.error){
-                        ErrorMessge({message: data.error})
+                        ErrorAlert({message: data.error})
                     }else{
                         ErrorMessge({message:"an error occurred"})
                     }

@@ -4,6 +4,7 @@ import AuthContext from '../../context/AuthContext'
 import Swal from 'sweetalert2';
 import objects from '../../jsonData/cities.json';
 import { baseUrl } from '../../Configure/urls';
+import { ErrorAlert } from '../../alerts/ErrorAlert';
 
 const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
 
@@ -58,7 +59,7 @@ const EditBasicDetails = ({setDisplayComponent, basicDetails}) => {
                     response.json()
                     .then(data => {
                         if (data.error) {
-                            ErrorMessge({message: data.error })
+                            ErrorAlert({message: data.error })
                         } else {
                             alert('An error occurred');
                         }

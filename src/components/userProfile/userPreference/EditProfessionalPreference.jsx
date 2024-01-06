@@ -4,6 +4,7 @@ import AuthContext from '../../../context/AuthContext';
 import Swal from 'sweetalert2';
 import { ErrorMessge } from '../../../alerts/UserAuthentication';
 import { baseUrl } from '../../../Configure/urls';
+import { ErrorAlert } from '../../../alerts/ErrorAlert';
 
 
 const EditProfessionalPreference = ({
@@ -58,7 +59,8 @@ const EditProfessionalPreference = ({
                     response.json()
                     .then(data =>{
                         if (data.error){
-                            ErrorMessge({message: data.error})
+                            
+                            ErrorAlert({message: data.error})
                         }else{
                             ErrorMessge({message:"an error occurred"})
                         }

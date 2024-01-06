@@ -4,6 +4,7 @@ import AuthContext from '../../../context/AuthContext';
 import { ErrorMessge } from '../../../alerts/UserAuthentication';
 import Swal from 'sweetalert2';
 import { baseUrl } from '../../../Configure/urls';
+import {ErrorAlert} from '../../../alerts/ErrorAlert';
 
 function isInteger(value) {
     return value.isInteger
@@ -63,7 +64,8 @@ const EditbasicPreference = ({basicPreference, setComponent}) => {
             } else if (response.status === 400) {
               const data = await response.json();
               if (data.error) {
-                ErrorMessge({ message: data.error });
+                
+                ErrorAlert({ message: data.error });
               } else {
                 ErrorMessge({ message: "An error occurred while update basic preference" });
               }
