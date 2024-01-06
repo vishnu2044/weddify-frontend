@@ -4,6 +4,7 @@ import { ErrorMessge } from '../../../alerts/UserAuthentication'
 import { useNavigate } from 'react-router-dom';
 import {AiOutlineHeart} from 'react-icons/ai';
 import { baseUrl } from '../../../Configure/urls';
+import {ErrorAlert} from '../../../alerts/ErrorAlert'
 
     const LocationPreference = () => {
         let {authTokens, logoutUser} = useContext(AuthContext)
@@ -30,7 +31,8 @@ import { baseUrl } from '../../../Configure/urls';
                     ErrorMessge({message:"unauthorized : not success"})
                     console.log(response.status);
                 }else if (response.status === 400){
-                    ErrorMessge({message:"complete your profile"})
+                    ErrorAlert({message:"complete your profile"})
+                    
                     navigate("/home/userprofile")
                 }else{
                     ErrorMessge({message: "and error comes while get matches by location!!"})
