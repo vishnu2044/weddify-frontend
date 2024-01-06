@@ -1,9 +1,18 @@
 import Swal from "sweetalert2";
 
-export const ErrorAlert = ({message}) => Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text: message,
-    footer: '<a href="#">Why do I have this issue?</a>'
-  });
-
+  const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+  
+  export const ErrorAlert = ({message}) =>  Toast.fire({
+      icon: "error",
+      title: message
+    });
