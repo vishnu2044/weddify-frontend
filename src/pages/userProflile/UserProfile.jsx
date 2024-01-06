@@ -12,6 +12,7 @@ import VisitedProfiles from '../../components/userProfile/VisitedProfiles';
 import BlockedMatches from '../../components/userProfile/BlockedMatches';
 import ProfilesVisitedYous from '../../components/userProfile/ProfilesVisitedYous';
 import { baseUrl } from '../../Configure/urls';
+import { ErrorAlert } from '../../alerts/ErrorAlert';
 
 
 const UserProfile = () => {
@@ -44,15 +45,15 @@ const UserProfile = () => {
             response.json()
             .then(data =>{
                 if (data.error){
-                    ErrorMessge({message: data.error})
+                    ErrorAlert({message: data.error})
                 }else{
                     console.log("user profile is not completed")
                 }
             })
               console.log(response.status);
           } else if (response.status === 401) {
+              ErrorAlert({message : "unauthorized user"})
               logoutUser()
-              ErrorMessge({message : "unauthorized user"})
           } else {
               alert("An error occurred while getting user profile");
               console.log(response.status)
