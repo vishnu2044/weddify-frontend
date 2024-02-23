@@ -107,7 +107,7 @@ const MatchesField = ({getAllMatches, allMatch}) => {
 
                             <div className="flex flex-wrap justify-center bord cursor-pointer">
                                 
-                                <p onClick={()=> navigate("/home/matchprofile", {state : {matchId : match.id }} )} className="border border-gray-800  shadow-md py-2 px-3 md:py-2.5 md:px-8 mx-1 font-semibold rounded-lg">View</p>
+                                <p onClick={()=> navigate("/home/matchprofile",  )} className="border border-gray-800  shadow-md py-2 px-3 md:py-2.5 md:px-8 mx-1 font-semibold rounded-lg">View</p>
                                 
                                 {match.like === true ? 
                                     <p onClick={()=>handleButtonManagement({match_id : match.id, button:'unLikeUser'})} className="bg-[#ff2525] text-white shadow-md py-2 px-2 md:py-2.5 md:px-8 mx-2 rounded-lg justify-center"> <AiOutlineHeart className='text-2xl'/> </p>
